@@ -23,22 +23,22 @@ El problema que este caso de estudio pretende resolver es: ¿Cómo optimizar y c
 En este caso de estudio buscamos ofrecer una solución tecnológica que simplifique la gestión hotelera, mejorando la eficiencia y aumentando la satisfacción del cliente, al reducir los errores humanos y acelerar los procesos de reserva, asignación de habitaciones, servicios, entre otros aspectos.
 
 ### Alcance
-  ## El sistema permitirá dar de alta habitaciones, pisos, reservas, huéspedes, empleados, y servicios del hotel.
-  ## A través de la gestión de reservas se relacionarán las habitaciones con los huéspedes, es decir, un huésped podrá solicitar la reserva de una habitación disponible.
-  ## Para realizar una reserva, será necesario conocer la disponibilidad de las habitaciones.
-  ## Además, el sistema permitirá gestionar múltiples servicios adicionales (como desayuno, cena,   entre otros) y asociarlos a las reservas.
-  ## El sistema también permitirá consultar habitaciones, reservas, huéspedes, empleados y servicios. Se gestionarán los pagos de las reservas y servicios.
-  ## Los empleados del hotel también serán gestionados dentro del sistema, permitiendo la asignación del cargo y control de sus actividades.
+  #### El sistema permitirá dar de alta habitaciones, pisos, reservas, huéspedes, empleados, y servicios del hotel.
+  #### A través de la gestión de reservas se relacionarán las habitaciones con los huéspedes, es decir, un huésped podrá solicitar la reserva de una habitación disponible.
+  #### Para realizar una reserva, será necesario conocer la disponibilidad de las habitaciones.
+  #### Además, el sistema permitirá gestionar múltiples servicios adicionales (como desayuno, cena,   entre otros) y asociarlos a las reservas.
+  #### El sistema también permitirá consultar habitaciones, reservas, huéspedes, empleados y servicios. Se gestionarán los pagos de las reservas y servicios.
+  #### Los empleados del hotel también serán gestionados dentro del sistema, permitiendo la asignación del cargo y control de sus actividades.
 
 ### Límites
-  ## No se almacenarán datos financieros sensibles (tarjetas de crédito, etc.).
-  ## No se incluirán datos de proveedores.
-  ## No se almacenarán archivos multimedia (imágenes, videos, etc.).
-  ## No se integrará con sistemas de seguridad o vigilancia.
-  ## No se almacenarán datos de eventos especiales o conferencias.
-  ## No se llevará un registro de preferencias personales de los huéspedes que permita personalizar la experiencia.
-  ## No se les entregará a los huéspedes la capacidad de aparcamiento.
-  ## No habrá libro de quejas.
+  #### No se almacenarán datos financieros sensibles (tarjetas de crédito, etc.).
+  #### No se incluirán datos de proveedores.
+  #### No se almacenarán archivos multimedia (imágenes, videos, etc.).
+  #### No se integrará con sistemas de seguridad o vigilancia.
+  #### No se almacenarán datos de eventos especiales o conferencias.
+  #### No se llevará un registro de preferencias personales de los huéspedes que permita personalizar la experiencia.
+  #### No se les entregará a los huéspedes la capacidad de aparcamiento.
+  #### No habrá libro de quejas.
 
 ## CAPITULO II: MARCO CONCEPTUAL O REFERENCIAL
 
