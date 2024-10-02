@@ -22,6 +22,13 @@ El problema que este caso de estudio pretende resolver es: ¿Cómo optimizar y c
 
 En este caso de estudio buscamos ofrecer una solución tecnológica que simplifique la gestión hotelera, mejorando la eficiencia y aumentando la satisfacción del cliente, al reducir los errores humanos y acelerar los procesos de reserva, asignación de habitaciones, servicios, entre otros aspectos.
 
+### Alcance
+El sistema permitirá dar de alta habitaciones, pisos, reservas, huéspedes, empleados, y servicios del hotel. A través de la gestión de reservas se relacionarán las habitaciones con los huéspedes, es decir, un huésped podrá solicitar la reserva de una habitación disponible.
+Para realizar una reserva, será necesario conocer la disponibilidad de las habitaciones. Además, el sistema permitirá gestionar múltiples servicios adicionales (como desayuno, cena, entre otros) y asociarlos a las reservas.
+El sistema también permitirá consultar habitaciones, reservas, huéspedes, empleados y servicios. Se gestionarán los pagos de las reservas y servicios, permitiendo seleccionar diferentes métodos de pago.
+En cuanto a los recibos, se generarán tanto la cabecera como el detalle, permitiendo un control detallado de las transacciones económicas realizadas.
+Adicionalmente, el sistema permitirá a los huéspedes dejar reseñas de su experiencia, lo que contribuirá a mejorar el servicio. Los empleados del hotel también serán gestionados dentro del sistema, permitiendo la asignación del cargo y control de sus actividades.
+
 ## CAPITULO II: MARCO CONCEPTUAL O REFERENCIAL
 
 Contiene las referencias fundamentales sobre la cual se erigirá el trabajo, los fundamentos y las
@@ -64,7 +71,7 @@ datos; por ej., a través de entrevistas, de revisión bibliográfica, de Intern
 
 ### Diccionario de datos
 
-Acceso al documento [PDF](doc/diccionario_datos.pdf) del diccionario de datos.
+Acceso al documento [PDF](docs/diccionario_datos.pdf) del diccionario de datos.
 
 <!-- ### Desarrollo TEMA 1 "----"
 
