@@ -7,30 +7,20 @@
 **Integrantes**:
 
 - Ledesma, Facundo Manuel 44.542.162
-- Lopez, Enzo
+- Lopez, Enzo 37.157.797
 - Olivarez, Alexis 44.542.230
 - Pineda, Carlos 95.963.784
 
 **Año**: 2024
 
 ## CAPÍTULO I: INTRODUCCIÓN
-
-Este capítulo introduce al Trabajo Práctico de manera de proporcionar una idea del por qué y
-para qué se realiza el mismo. El capítulo debe contener, por lo menos, los siguientes puntos:
-
 ### Caso de estudio
-
-El Caso de estudio se refiere al problema sobre el cual se quiere investigar. El tema debe estar
-expresado en el Título del Trabajo Práctico y debe ser suficientemente concreto; debe
-orientar al lector a comprender de qué trata el Trabajo Práctico. El Título debe demostrar
-el tema y en particular el problema que va a investigarse.
+El desarrollo del caso de estudio sobre la administración de un hotel pretende mejorar la gestión operativa del mismo, que actualmente se realiza de manera manual o con herramientas poco eficientes, lo que genera demoras y dificultades en el control de las actividades diarias.
 
 ### Definición o planteamiento del problema
+El problema que este caso de estudio pretende resolver es: ¿Cómo optimizar y centralizar la administración de un hotel mediante una base de datos relacional que facilite el acceso rápido a la información clave y automatice procesos críticos como la reserva de habitaciones, la gestión de servicios y el registro de huéspedes?
 
-El Trabajo Práctico se plantea como problema de investigación o como una situación
-desconocida para el alumno y que lo incita a la búsqueda de su esclarecimiento. La
-definición del problema puede tomar la forma de una declaración o pregunta o serie de
-preguntas que se ubican en los primeros párrafos de la introducción.
+En este caso de estudio buscamos ofrecer una solución tecnológica que simplifique la gestión hotelera, mejorando la eficiencia y aumentando la satisfacción del cliente, al reducir los errores humanos y acelerar los procesos de reserva, asignación de habitaciones, servicios, entre otros aspectos.
 
 ## CAPITULO II: MARCO CONCEPTUAL O REFERENCIAL
 
@@ -64,23 +54,9 @@ tratamiento de la información. El alumno debe mencionar con qué método obtuvo
 datos; por ej., a través de entrevistas, de revisión bibliográfica, de Internet, etc.
 
 ## CAPÍTULO IV: DESARROLLO DEL TEMA / PRESENTACIÓN DE RESULTADOS
+### Diagrama conceptual
 
-Este es el Capítulo donde el estudiante presenta todos los hallazgos del estudio. Está compuesto
-de palabras, números, tablas, gráficos y figuras que demuestra el desarrollo del tema. Debe ser
-la parte más voluminosa del Trabajo Práctico.
-
-La información debe presentarse de manera objetiva, presentando los datos encontrados para
-responder a las preguntas y objetivos planteados en el Primer Capítulo. Por eso, la mejor manera
-de presentar la información es relacionarla con los objetivos del Trabajo Práctico. El alumno
-debe resaltar los principales puntos y guiar al lector a través de los gráficos, figuras e información
-que presenta. Es importante resaltar que el desarrollo debe estar en relación al tema, a las
-preguntas de investigación y a los objetivos del estudio.
-
-En este Capítulo el alumno sólo expone los hallazgos, no emite ninguna conclusión sobre el
-tema; esto lo hará en el capítulo correspondiente. Aquí sólo “da cuenta”, presenta la
-información recogida, propone un diseño para la ejecución del Plan de Desarrollo. No emite
-ninguna opinión personal de conclusión con respecto al objetivo o a las preguntas de
-investigación.
+![diagrama_conceptual](/docs/image_relational.png)
 
 ### Diagrama relacional
 
