@@ -25,7 +25,7 @@ El problema que este caso de estudio pretende resolver es: ¿Cómo optimizar y c
 
 En este caso de estudio buscamos ofrecer una solución tecnológica que simplifique la gestión hotelera, mejorando la eficiencia y aumentando la satisfacción del cliente, al reducir los errores humanos y acelerar los procesos de reserva, asignación de habitaciones, servicios, entre otros aspectos.
 
-### Alcance
+### Alcances
 
 1. El sistema permitirá dar de alta habitaciones, pisos, reservas, huéspedes, empleados, y servicios del hotel.
 2. A través de la gestión de reservas se relacionarán las habitaciones con los huéspedes, es decir, un huésped podrá solicitar la reserva de una habitación disponible.
