@@ -56,7 +56,7 @@ datos; por ej., a través de entrevistas, de revisión bibliográfica, de Intern
 ## CAPÍTULO IV: DESARROLLO DEL TEMA / PRESENTACIÓN DE RESULTADOS
 ### Diagrama conceptual
 
-![diagrama_conceptual](/docs/image_relational.png)
+![diagrama_conceptual](/docs/image_conceptual.png)
 
 ### Diagrama relacional
 
