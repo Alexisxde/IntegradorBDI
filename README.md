@@ -14,31 +14,36 @@
 **Año**: 2024
 
 ## CAPÍTULO I: INTRODUCCIÓN
+
 ### Caso de estudio
+
 El desarrollo del caso de estudio sobre la administración de un hotel pretende mejorar la gestión operativa del mismo, que actualmente se realiza de manera manual o con herramientas poco eficientes, lo que genera demoras y dificultades en el control de las actividades diarias.
 
 ### Definición o planteamiento del problema
+
 El problema que este caso de estudio pretende resolver es: ¿Cómo optimizar y centralizar la administración de un hotel mediante una base de datos relacional que facilite el acceso rápido a la información clave y automatice procesos críticos como la reserva de habitaciones, la gestión de servicios y el registro de huéspedes?
 
 En este caso de estudio buscamos ofrecer una solución tecnológica que simplifique la gestión hotelera, mejorando la eficiencia y aumentando la satisfacción del cliente, al reducir los errores humanos y acelerar los procesos de reserva, asignación de habitaciones, servicios, entre otros aspectos.
 
 ### Alcance
-  1. El sistema permitirá dar de alta habitaciones, pisos, reservas, huéspedes, empleados, y servicios del hotel.
-  2. A través de la gestión de reservas se relacionarán las habitaciones con los huéspedes, es decir, un huésped podrá solicitar la reserva de una habitación disponible.
-  3. Para realizar una reserva, será necesario conocer la disponibilidad de las habitaciones.
-  4. Además, el sistema permitirá gestionar múltiples servicios adicionales (como desayuno, cena,   entre otros) y asociarlos a las reservas.
-  5. El sistema también permitirá consultar habitaciones, reservas, huéspedes, empleados y servicios. Se gestionarán los pagos de las reservas y servicios.
-  6. Los empleados del hotel también serán gestionados dentro del sistema, permitiendo la asignación del cargo y control de sus actividades.
+
+1. El sistema permitirá dar de alta habitaciones, pisos, reservas, huéspedes, empleados, y servicios del hotel.
+2. A través de la gestión de reservas se relacionarán las habitaciones con los huéspedes, es decir, un huésped podrá solicitar la reserva de una habitación disponible.
+3. Para realizar una reserva, será necesario conocer la disponibilidad de las habitaciones.
+4. Además, el sistema permitirá gestionar múltiples servicios adicionales (como desayuno, cena, entre otros) y asociarlos a las reservas.
+5. El sistema también permitirá consultar habitaciones, reservas, huéspedes, empleados y servicios. Se gestionarán los pagos de las reservas y servicios.
+6. Los empleados del hotel también serán gestionados dentro del sistema, permitiendo la asignación del cargo y control de sus actividades.
 
 ### Límites
-  1. No se almacenarán datos financieros sensibles (tarjetas de crédito, etc.).
-  2. No se incluirán datos de proveedores.
-  3. No se almacenarán archivos multimedia (imágenes, videos, etc.).
-  4. No se integrará con sistemas de seguridad o vigilancia.
-  5. No se almacenarán datos de eventos especiales o conferencias.
-  6. No se llevará un registro de preferencias personales de los huéspedes que permita personalizar la experiencia.
-  7. No se les entregará a los huéspedes la capacidad de aparcamiento.
-  8. No habrá libro de quejas.
+
+1. No se almacenarán datos financieros sensibles (tarjetas de crédito, etc.).
+2. No se incluirán datos de proveedores.
+3. No se almacenarán archivos multimedia (imágenes, videos, etc.).
+4. No se integrará con sistemas de seguridad o vigilancia.
+5. No se almacenarán datos de eventos especiales o conferencias.
+6. No se llevará un registro de preferencias personales de los huéspedes que permita personalizar la experiencia.
+7. No se les entregará a los huéspedes la capacidad de aparcamiento.
+8. No habrá libro de quejas.
 
 ## CAPITULO II: MARCO CONCEPTUAL O REFERENCIAL
 
@@ -72,6 +77,7 @@ tratamiento de la información. El alumno debe mencionar con qué método obtuvo
 datos; por ej., a través de entrevistas, de revisión bibliográfica, de Internet, etc.
 
 ## CAPÍTULO IV: DESARROLLO DEL TEMA / PRESENTACIÓN DE RESULTADOS
+
 ### Diagrama conceptual
 
 ![diagrama_conceptual](/docs/image_conceptual.png)
