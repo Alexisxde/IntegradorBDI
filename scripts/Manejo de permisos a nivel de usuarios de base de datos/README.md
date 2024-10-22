@@ -32,7 +32,7 @@
 
 - Realizar INSERT con sentencia SQL sobre la tabla del procedimiento con ambos usuarios.
 
-- Realizar un INSERT a través del procedimiento almacenado con el usuario con permiso de solo lectura
+- Realizar un INSERT a través del procedimiento almacenado con el usuario con permiso de solo lectura.
 
 ## Permisos a nivel de roles del DBMS:
 
@@ -42,6 +42,6 @@
 
 - Darle permiso a uno de los usuarios sobre el rol creado anteriormente.
 
-- Verificar el comportamiento de ambos usuarios (el que tiene permiso sobre el rol y el que no tiene), cuando intentan leer el contenido de la tabla
+- Verificar el comportamiento de ambos usuarios (el que tiene permiso sobre el rol y el que no tiene), cuando intentan leer el contenido de la tabla.
 
-- Expresar sus conclusiones
+- Expresar sus conclusiones.

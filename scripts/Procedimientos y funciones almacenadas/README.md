@@ -17,7 +17,11 @@
 ## Tareas:
 
 - Realizar al menos tres procedimientos almacenados que permitan: Insertar, Modificar y borrar registros de alguna de las tablas del proyecto.
+
 - Insertar un lote de datos en las tablas mencionadas (guardar el script) con sentencias insert y otro lote invocando a los procedimientos creados.
+
 - Realizar update y delete sobre algunos de los registros insertados en esas tablas invocando a los procedimientos.
+
 - Desarrollar al menos tres funciones almacenadas. Por ej: calcular la edad.
+
 - Comparar la eficiencia de las operaciones directas versus el uso de procedimientos y funciones.
