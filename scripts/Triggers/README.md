@@ -24,45 +24,84 @@ La sintaxis de la instrucción **`CREATE TRIGGER`**:
 
 ```SQL
 CREATE TRIGGER nombre_trigger
-ON nombre_tabla FOR (INSERT o UPDATE o DELETE) AS SET NOCOUNT ON
+ON nombre_tabla AFTER (INSERT o UPDATE o DELETE) AS SET NOCOUNT ON
 BEGIN
-  /* SQL */
+  -- SQL
 END;
 ```
+
+> [!IMPORTANT]  
+> Un `TRIGGER` no puede existir sin una tabla asociada.
+
+> [!CAUTION]
+> La sentencia `TRUNCATE` no ejecutará ningun `TRIGGER`
+
+## **Tipos de `TRIGGER` en SQL Server**
+
+### `AFTER`
+
+- Se ejecutan después de que una operación INSERT, UPDATE o DELETE ha ocurrido.
+- Útiles para realizar acciones una vez que los datos ya están modificados en la base de datos, como registros en una tabla de auditoría.
+
+### `INSTEAD OF`
+
+- Se ejecutan en lugar de la operación INSERT, UPDATE o DELETE.
+- Útiles cuando quieres anular o modificar el comportamiento predeterminado de la operación, o cuando quieres controlar complejamente qué datos se insertan o actualizan.
+
+## **Pseudotablas `INSERTED` y `DELETED`**
+
+En SQL Server se pueden usar las pseudotablas `INSERTED` y `DELETED`. Estas pseudotablas se utilizan principalmente en triggers para manejar los datos antes y después de una operación.
+
+`INSERTED:` Contiene las nuevas filas que están siendo insertadas o actualizadas.
+`DELETED:` Contiene las filas antiguas que están siendo eliminadas o actualizadas.
 
 ## **Resumen y consejos para utilizar `TRIGGER`**:
 
 En resumen un TRIGGER sirve para:
 
-- Ejecutar un código SQL cuando ocurra un evento en concreto: **`INSERT`**, **`UPDATE`** o **`DELETE`**.
+- Ejecutar un código SQL cuando ocurra un evento en concreto: **`INSERT`** o **`UPDATE`** o **`DELETE`**.
 - Ayudar a mantener la integridad de la información
 - Manipular la información de una consulta en concreto ANTES o DESPUES de su ejecución.
 
-## **Crear la tabla de auditoría**
+## **Ejemplos de usos de `TRIGGERS`**
 
-Esta tabla almacenará los valores antiguos antes de una actualización o eliminación. Además, se registrará la fecha, hora y el usuario de la base de datos.
+### **Crear la tabla de auditoría**
+
+Esta tabla almacenará los valores antiguos antes
+de una actualización o eliminación. Además, se registrará
+la fecha, hora y el usuario de la base de datos.
 
 ```SQL
+CREATE TABLE EMPLEADOS (
+  ID_EMPLEADO INT NOT NULL,
+  NOMBRE_APELLIDO VARCHAR(50) NOT NULL,
+  HORARIO VARCHAR(50) NOT NULL,
+  ID_CARGO INT NOT NULL,
+  CONSTRAINT PK_ID_EMPLEADO PRIMARY KEY (ID_EMPLEADO),
+  CONSTRAINT FK_ID_CARGO_EMPLEADO FOREIGN KEY (ID_CARGO) REFERENCES CARGOS(ID_CARGO)
+);
+
 CREATE TABLE AUDITORIA_EMPLEADOS (
   ID_AUDITORIA_EMPLEADO INT IDENTITY(1, 1),
-  NOMBRE_APELLIDO VARCHAR(50) NOT NULL,
+  ID_EMPLEADO INT NOT NULL,
+	NOMBRE_APELLIDO VARCHAR(50) NOT NULL,
   HORARIO VARCHAR(50) NOT NULL,
   ID_CARGO INT NOT NULL,
   FECHA DATETIME,
   USUARIOBD VARCHAR(128),
   OPERACION VARCHAR(10),
-  CONSTRAINT PK_AUDITORIA_EMPLEADOS PRIMARY KEY(ID_AUDITORIA_EMPLEADO),
-  CONSTRAINT FK_ID_CARGO_AUDITORIA_EMPLEADO FOREIGN KEY (ID_CARGO) REFERENCES CARGOS(ID_CARGO)
+	CONSTRAINT PK_AUDITORIA_EMPLEADOS PRIMARY KEY(ID_AUDITORIA_EMPLEADO),
+	CONSTRAINT FK_ID_CARGO_AUDITORIA_EMPLEADO FOREIGN KEY (ID_CARGO) REFERENCES CARGOS(ID_CARGO)
 );
 ```
 
-### **Crear el `TRIGGER` para `UPDATE`**
+#### **Ejemplo `AFTER`**
 
-Este trigger registrará los valores antes de una actualización:
+Este trigger registrará los valores después de una actualización:
 
 ```SQL
-CREATE TRIGGER TRG_AUDITORIA_UPDATE_EMPLEADOS
-ON EMPLEADOS FOR UPDATE AS SET NOCOUNT ON
+CREATE TRIGGER TRG_AUDITORIA_UPDATE_EMPLEADOS_AFTER
+ON EMPLEADOS AFTER UPDATE AS SET NOCOUNT ON
 BEGIN
   INSERT INTO AUDITORIA_EMPLEADOS
     SELECT
@@ -77,71 +116,71 @@ BEGIN
 END;
 ```
 
-### **Crear el `TRIGGER` para `DELETE`**
+En este ejemplo:
 
-Este trigger registrará los valores antes de una eliminación:
+- Se registra en la tabla AUDITORIA_EMPLEADOS los valores antiguos de los empleados.
+- `DELETED` contiene los valores antiguos.
+
+#### **Ejemplo `INSTEAD OF`**
+
+Se usa para controlar cómo se manejan las operaciones en la tabla. En este ejemplo, se evita que se borren las reservas que hayan sido aprobadas.
 
 ```SQL
-CREATE TRIGGER TRG_AUDITORIA_DELETE_EMPLEADOS
-ON EMPLEADOS FOR DELETE AS SET NOCOUNT ON
+CREATE TRIGGER TRG_DELETE_RESERVAS_INSTEAD_OF
+ON RESERVAS INSTEAD OF DELETE AS SET NOCOUNT ON
 BEGIN
-  INSERT INTO AUDITORIA_EMPLEADOS
-    SELECT
-      DELETED.ID_EMPLEADO,
-      DELETED.NOMBRE_APELLIDO,
-      DELETED.HORARIO,
-      DELETED.ID_CARGO,
-      GETDATE() AS FECHA,
-      SUSER_SNAME() AS USUARIOBD,
-      'DELETE' AS OPERACION
-    FROM DELETED;
+  DELETE FROM RESERVAS
+  WHERE ID_ESTADO_RESERVA IN (SELECT ID_ESTADO_RESERVA FROM DELETED) AND ID_ESTADO_RESERVA <> 1;
+  IF EXISTS (SELECT * FROM DELETED WHERE ID_ESTADO_RESERVA = 1)
+  BEGIN
+    PRINT 'No se pueden eliminar las reservas que ya estan aprobadas.';
+  END
 END;
 ```
 
-```SQL
-SELECT * FROM EMPLEADOS;
-```
+En este ejemplo:
 
-| ID_EMPLEADO |  NOMBRE_APELLIDO  |   HORARIOS    | ID_CARGO |
-| :---------: | :---------------: | :-----------: | :------: |
-|      1      |    Enzo Pérez     | 09:00 - 17:00 |    1     |
-|      2      |   Alexis Gómez    | 10:00 - 18:00 |    1     |
-|      3      | Facundo Fernández | 07:00 - 16:00 |    2     |
-|      4      |   Carlos López    | 12:00 - 20:00 |    2     |
-|      5      |    Jorge Ruiz     | 14:00 - 22:00 |    3     |
+Solo se eliminan las reservas que cuyo ID_ESTADO_RESERVA es distinto a 1. Si intentas eliminar una reserva con ID_ESTADO_RESERVA = 1, el trigger previene la eliminación e imprime un mensaje.
+
+### **Eliminación de un `TRIGGER`**
+
+Para eliminar un trigger en SQL Server:
 
 ```SQL
-DELETE FROM EMPLEADOS WHERE ID_EMPLEADO = 1;
-DELETE FROM EMPLEADOS WHERE ID_EMPLEADO = 2;
-UPDATE EMPLEADOS SET HORARIO = '7:00 - 16:00' WHERE ID_EMPLEADO = 3;
-
-SELECT * FROM AUDITORIA_EMPLEADOS;
+DROP TRIGGER nombre_del_trigger;
 ```
 
-| ID  | ID_EMPLEADO |  NOMBRE_APELLIDO  |   HORARIOS    | ID_CARGO |        FECHA        | USUARIOBD | OPERACION |
-| :-: | :---------: | :---------------: | :-----------: | :------: | :-----------------: | :-------: | :-------: |
-|  1  |      1      |    Enzo Pérez     | 09:00 - 17:00 |    1     | 2024-10-30 21:13:16 |  ALEXIS   |  DELETE   |
-|  2  |      2      |   Alexis Gómez    | 10:00 - 18:00 |    1     | 2024-10-30 21:18:49 |  ALEXIS   |  DELETE   |
-|  3  |      3      | Facundo Fernández | 07:00 - 15:00 |    2     | 2024-10-30 21:20:23 |  ALEXIS   |  UPDATE   |
+Puedes verificar los triggers existentes en la base de datos consultando la vista del sistema `sys.triggers`:
 
-## Objetivos de Aprendizaje:
+```SQL
+SELECT name AS TRIGGERS FROM sys.triggers
+```
 
-- Entender el concepto y tipos de triggers en bases de datos.
+### Evitar el mensaje duplicado al ejecutar un `TRIGGER`
 
-- Implementar triggers para auditoría y control de operaciones.
+```
+(1 row affected)
 
-## Criterios de Evaluación:
+(1 row affected)
 
-- Funcionalidad de los triggers en los casos de prueba.
+Completion time: 2024-11-02T18:26:55.4199633-03:00
+```
 
-- Impacto en la integridad y seguridad de los datos.
+> [!TIP]  
+> Para evitar el mensaje duplicado, puedes suprimirlo al inicio del trigger usando `SET NOCOUNT ON` para que SQL Server no muestre la cantidad de filas afectadas, esto sirve para que no se sepa que una tabla tiene un `TRIGGER` asociado.
 
-- Claridad en la documentación y pruebas.
+```SQL
+CREATE TRIGGER TRG_AUDITORIA_UPDATE_EMPLEADOS_AFTER
+ON EMPLEADOS AFTER UPDATE AS SET NOCOUNT ON
+BEGIN
+  -- SQL
+END;
+```
 
-## Tareas:
+Después del `SET NOCOUNT ON`
 
-- Definir triggers de auditorías por cada update o delete sobre alguna tabla del modelo que pueda registrar en tablas auxiliares los valores de los registros antes de un borrado o modificación de cualquier dato, más la fecha, hora y usuario de la base de datos que realizó la operación.
+```
+(1 row affected)
 
-- Definir un trigger que al intentar realizar un delete sobre una tabla emita un mensaje y no permita realizar la operación.
-
-- Expresar las conclusiones en base a las pruebas realizadas.
+Completion time: 2024-11-02T18:26:55.4199633-03:00
+```
