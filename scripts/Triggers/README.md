@@ -33,35 +33,28 @@ END;
 > [!IMPORTANT]  
 > Un `TRIGGER` no puede existir sin una tabla asociada.
 
-> [!CAUTION]
-> La sentencia `TRUNCATE` no ejecutará ningun `TRIGGER`
-
 ## **Tipos de `TRIGGER` en SQL Server**
 
 ### `AFTER`
 
-- Se ejecutan después de que una operación INSERT, UPDATE o DELETE ha ocurrido.
+- Se ejecutan después de que una operación `INSERT` o `UPDATE` o `DELETE` ha ocurrido.
 - Útiles para realizar acciones una vez que los datos ya están modificados en la base de datos, como registros en una tabla de auditoría.
 
 ### `INSTEAD OF`
 
-- Se ejecutan en lugar de la operación INSERT, UPDATE o DELETE.
+- Se ejecutan en lugar de la operación `INSERT` o `UPDATE` o `DELETE`
 - Útiles cuando quieres anular o modificar el comportamiento predeterminado de la operación, o cuando quieres controlar complejamente qué datos se insertan o actualizan.
+
+> [!CAUTION]
+> La sentencia `TRUNCATE` no ejecutará ningun `TRIGGER`
 
 ## **Pseudotablas `INSERTED` y `DELETED`**
 
 En SQL Server se pueden usar las pseudotablas `INSERTED` y `DELETED`. Estas pseudotablas se utilizan principalmente en triggers para manejar los datos antes y después de una operación.
 
-`INSERTED:` Contiene las nuevas filas que están siendo insertadas o actualizadas.
-`DELETED:` Contiene las filas antiguas que están siendo eliminadas o actualizadas.
+- `INSERTED:` Contiene las nuevas filas que están siendo insertadas o actualizadas.
 
-## **Resumen y consejos para utilizar `TRIGGER`**:
-
-En resumen un TRIGGER sirve para:
-
-- Ejecutar un código SQL cuando ocurra un evento en concreto: **`INSERT`** o **`UPDATE`** o **`DELETE`**.
-- Ayudar a mantener la integridad de la información
-- Manipular la información de una consulta en concreto ANTES o DESPUES de su ejecución.
+- `DELETED:` Contiene las filas antiguas que están siendo eliminadas o actualizadas.
 
 ## **Ejemplos de usos de `TRIGGERS`**
 
@@ -84,18 +77,18 @@ CREATE TABLE EMPLEADOS (
 CREATE TABLE AUDITORIA_EMPLEADOS (
   ID_AUDITORIA_EMPLEADO INT IDENTITY(1, 1),
   ID_EMPLEADO INT NOT NULL,
-	NOMBRE_APELLIDO VARCHAR(50) NOT NULL,
+  NOMBRE_APELLIDO VARCHAR(50) NOT NULL,
   HORARIO VARCHAR(50) NOT NULL,
   ID_CARGO INT NOT NULL,
   FECHA DATETIME,
   USUARIOBD VARCHAR(128),
   OPERACION VARCHAR(10),
-	CONSTRAINT PK_AUDITORIA_EMPLEADOS PRIMARY KEY(ID_AUDITORIA_EMPLEADO),
-	CONSTRAINT FK_ID_CARGO_AUDITORIA_EMPLEADO FOREIGN KEY (ID_CARGO) REFERENCES CARGOS(ID_CARGO)
+  CONSTRAINT PK_AUDITORIA_EMPLEADOS PRIMARY KEY(ID_AUDITORIA_EMPLEADO),
+  CONSTRAINT FK_ID_CARGO_AUDITORIA_EMPLEADO FOREIGN KEY (ID_CARGO) REFERENCES CARGOS(ID_CARGO)
 );
 ```
 
-#### **Ejemplo `AFTER`**
+### **Ejemplo `AFTER`**
 
 Este trigger registrará los valores después de una actualización:
 
@@ -121,7 +114,7 @@ En este ejemplo:
 - Se registra en la tabla AUDITORIA_EMPLEADOS los valores antiguos de los empleados.
 - `DELETED` contiene los valores antiguos.
 
-#### **Ejemplo `INSTEAD OF`**
+### **Ejemplo `INSTEAD OF`**
 
 Se usa para controlar cómo se manejan las operaciones en la tabla. En este ejemplo, se evita que se borren las reservas que hayan sido aprobadas.
 
@@ -140,7 +133,8 @@ END;
 
 En este ejemplo:
 
-Solo se eliminan las reservas que cuyo ID_ESTADO_RESERVA es distinto a 1. Si intentas eliminar una reserva con ID_ESTADO_RESERVA = 1, el trigger previene la eliminación e imprime un mensaje.
+- Solo se eliminan las reservas que cuyo ID_ESTADO_RESERVA es distinto a 1.
+- Si intentas eliminar una reserva con ID_ESTADO_RESERVA = 1 el trigger previene la eliminación e imprime un mensaje.
 
 ### **Eliminación de un `TRIGGER`**
 
@@ -184,3 +178,11 @@ Después del `SET NOCOUNT ON`
 
 Completion time: 2024-11-02T18:26:55.4199633-03:00
 ```
+
+## **Resumen y consejos para utilizar `TRIGGER`**:
+
+En resumen un TRIGGER sirve para:
+
+- Ejecutar un código SQL cuando ocurra un evento en concreto: **`INSERT`** o **`UPDATE`** o **`DELETE`**.
+- Ayudar a mantener la integridad de la información
+- Manipular la información de una consulta en concreto ANTES o DESPUES de su ejecución.
