@@ -1,6 +1,11 @@
 # Tema: Procedimientos y funciones almacenadas
 ## INTRODUCCION
 
+En SQL Server, los procedimientos almacenados y las funciones son herramientas clave que permiten optimizar y organizar las operaciones que se realizan en una base de datos.  
+
+Los procedimientos almacenados se utilizan principalmente para ejecutar tareas específicas, como operaciones de inserción, actualización, eliminación o cualquier acción que implique cambios en los datos o en su estructura. Sirven para encapsular múltiples pasos en un solo bloque de código que puede llamarse luego. Los procedimientos almacenados pueden incluir parámetros de entrada y salida, lo que permite manejar datos complejos y devolver resultados variables. 
+
+Las funciones están diseñadas para realizar cálculos o transformaciones que se pueden aplicar directamente en consultas SQL. Esto significa que una función puede ser llamada en un SELECT, WHERE o cualquier otra parte de una consulta, facilitando la manipulación de datos de manera dinámica. Sin embargo, a diferencia de los procedimientos restricciones: no pueden modificar datos en la base de datos y están limitadas a solo leer datos. Este diseño asegura que sean seguras de utilizar en consultas sin causar efectos secundarios no deseados en la base de datos. 
 
 ## Objetivos de Aprendizaje:
 
