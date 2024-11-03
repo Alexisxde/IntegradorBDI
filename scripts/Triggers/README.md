@@ -150,7 +150,7 @@ Puedes verificar los triggers existentes en la base de datos consultando la vist
 SELECT name AS TRIGGERS FROM sys.triggers
 ```
 
-### Evitar el mensaje duplicado al ejecutar un `TRIGGER`
+### **Evitar el mensaje duplicado al ejecutar un `TRIGGER`**
 
 ```
 (1 row affected)

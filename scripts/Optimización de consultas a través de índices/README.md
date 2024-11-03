@@ -1,25 +1,30 @@
 # Tema: Optimización de consultas a través de índices
 
-## ¿Qué es un indice? Tipos de Indices y sus aplicaciones:
+## **¿Qué es un indice? Tipos de Indices y sus aplicaciones:**
 
 Un índice es una estructura en disco asociada con una tabla o vista que acelera la recuperación de filas de la tabla o vista. Un índice contiene claves construidas a partir de una o más columnas en la tabla o vista. Estas claves se almacenan en una estructura (B-árbol) que permite a SQL Server encontrar la fila o filas asociadas con los valores de clave de forma rápida y eficiente.
 Cuando se ejecuta esta consulta, el optimizador de consultas evalúa cada método disponible para recuperar los datos y selecciona el método más eficiente. El método puede ser un escaneo de tabla, o puede estar escaneando uno o más índices si existen.
 
-TIPOD DE INDICES.
+### **Tipos de indices**
 
-## Agrupado:
+#### **Agrupado:**
+
 Los índices agrupados ordenan y almacenan las filas de datos en la tabla o vista en función de sus valores clave. Estos valores clave son las columnas incluidas en la definición de índice. Solo puede haber un índice agrupado por tabla, porque las filas de datos en sí mismas se pueden almacenar en un solo orden.
 La única vez que las filas de datos en una tabla se almacenan en orden ordenado es cuando la tabla contiene un índice agrupado. Cuando una tabla tiene un índice agrupado, la tabla se denomina tabla agrupada. Si una tabla no tiene un índice agrupado, sus filas de datos se almacenan en una estructura desordenada llamada montón.
 
-## CREAR UN INDICE AGRUPADO
+##### **Crear un indice agrupado**
 
+```SQL
 CREATE CLUSTERED INDEX idx_fecha_nacimiento ON HUESPEDES(FECHA_NACIMIENTO);
+```
 
----BORRAR INDICE CREADO---
+##### **Borrar indice creado**
 
+```SQL
 DROP INDEX idx_fecha_nacimiento ON HUESPEDES;
+```
 
-## No agrupado
+#### **No agrupado:**
 
 Los índices no agrupados tienen una estructura separada de las filas de datos. Un índice no agrupado contiene los valores de clave de índice no agrupados y cada entrada de valor de clave tiene un puntero a la fila de datos que contiene el valor de clave.
 El puntero de una fila de índice en un índice no agrupado a una fila de datos se denomina localizador de filas. La estructura del localizador de filas depende de si las páginas de datos se almacenan en un montón o en una tabla agrupada. Para un montón, un localizador de filas es un puntero a la fila. Para una tabla agrupada, el localizador de filas es la clave de índice agrupada.
@@ -30,17 +35,18 @@ Desventajas:
 Rendimiento en Escrituras: Cada vez que se inserta, actualiza o elimina una fila, los índices no agrupados también deben actualizarse, lo que puede afectar el rendimiento de las operaciones de escritura.
 Espacio: Requieren espacio adicional en disco debido a su estructura separada.
 
-## CREAR UN INDICE NO AGRUPADO
+##### **Crear un indice no agrupado**
 
-```
+```SQL
 CREATE NONCLUSTERED INDEX idx_fecha_nacimiento_dato ON HUESPEDES(FECHA_NACIMIENTO)
 INCLUDE (NOMBRE_APELLIDO);
 ```
 
----BORRAR INDICE CREADO---
+##### **Borrar indice creado**
 
+```SQL
 DROP INDEX idx_fecha_nacimiento_dato ON HUESPEDES;
-
+```
 
 ## Conclusiones:
 
@@ -60,7 +66,8 @@ Uso de Espacio:
 Índice Agrupado: Al estar directamente ligado a las filas de datos, el índice agrupado no requiere espacio adicional más allá de los datos en sí.
 Índice No Agrupado: Requiere espacio adicional en disco, ya que los datos del índice y los datos de la tabla están separados.
 
-
+> [!CAUTION]
+> La tarea va en el script.sql Enzo.
 
 ## Tareas:
 
@@ -70,11 +77,11 @@ Uso de Espacio:
 
 - Realizar una búsqueda por periodo y registrar el plan de ejecución utilizado por el motor y los tiempos de respuesta.
 
-``` plan de ejecucion del motor en un intervalo de fecha
+```plan de ejecucion del motor en un intervalo de fecha
 SET SHOWPLAN_ALL ON;-- Habilitar el plan de ejecución para la consulta sin índice
 go
-SELECT * 
-FROM HUESPEDES 
+SELECT *
+FROM HUESPEDES
 WHERE FECHA_NACIMIENTO BETWEEN '1978-11-05' AND '2011-11-20';
 go
 SET SHOWPLAN_ALL OFF;-- Deshabilitar el plan de ejecución
@@ -85,8 +92,8 @@ go
 SET STATISTICS TIME ON;
 SET STATISTICS IO ON;
 
-SELECT * 
-FROM HUESPEDES 
+SELECT *
+FROM HUESPEDES
 WHERE FECHA_NACIMIENTO BETWEEN '1978-11-05' AND '2011-11-20';
 ORDER BY FECHA_NACIMIENTO
 
@@ -99,6 +106,7 @@ SET STATISTICS IO OFF;
 CREATE CLUSTERED INDEX idx_fecha_nacimiento ON HUESPEDES(FECHA_NACIMIENTO);
 
 - Borrar el índice creado.
+
 ```
 DROP INDEX idx_fecha_nacimiento ON HUESPEDES;
 ```
