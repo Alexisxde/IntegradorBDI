@@ -1,6 +1,6 @@
 # Tema: Triggers
 
-## **¿Qué es y cómo usar un trigger en SQL?**
+## **¿Qué es un trigger en SQL?**
 
 Un trigger es un procedimiento almacenado en la base de datos que se ejecuta automáticamente cada vez que ocurre un evento especial en la base de datos. Por ejemplo, un desencadenante puede activarse cuando se inserta una fila en una tabla específica o cuando ciertas columnas de la tabla se actualizan.
 
@@ -16,11 +16,9 @@ Esta clase de Triggers se activa en eventos que modifican la estructura de la ba
 
 Esta es la clase más común de Triggers. En este caso, el evento de disparo es una declaración de modificación de datos; podría ser una declaración de inserción, actualización o eliminación en una tabla o vista.
 
-## **Cómo usar un Trigger en SQL**
+## **¿Cómo crear un Trigger en SQL?**
 
-La instrucción **CREATE TRIGGER** permite crear un nuevo trigger que se activa automáticamente cada vez que ocurre un evento, como **INSERT**, **DELETE** o **UPDATE**, en una tabla.
-
-La sintaxis de la instrucción **`CREATE TRIGGER`**:
+La instrucción **CREATE TRIGGER** permite crear un nuevo trigger que se activa automáticamente cada vez que ocurre un evento, como **INSERT**, **DELETE** o **UPDATE** en una tabla.
 
 ```SQL
 CREATE TRIGGER nombre_trigger
