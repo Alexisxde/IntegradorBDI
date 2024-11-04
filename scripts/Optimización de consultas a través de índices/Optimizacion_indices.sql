@@ -26,8 +26,8 @@ DECLARE @Datos TABLE (DNI INT, NOMBRE_APELLIDO NVARCHAR(50), FECHA_NACIMIENTO DA
 
 INSERT INTO @Datos (DNI, NOMBRE_APELLIDO, FECHA_NACIMIENTO)
 VALUES 
-(12345678, 'Juan Pérez', '1985-03-15'),(87654321, 'Ana Gómez', '1990-07-22'),
-(23456789, 'Luis Fernández', '1978-11-05'),(34567890, 'María López', '1995-02-10'),
+(12345678, 'Juan PÃ©rez', '1985-03-15'),(87654321, 'Ana GÃ³mez', '1990-07-22'),
+(23456789, 'Luis FernÃ¡ndez', '1978-11-05'),(34567890, 'MarÃ­a LÃ³pez', '1995-02-10'),
 (45678901, 'Carlos Ruiz', '1982-09-30'),(25000111, 'Tomas Shneider', '1985-03-15'),
 (26222333, 'Ana Cardozo', '1990-07-22'),(27444555, 'Luis Catillo', '1978-11-05'),
 (28666777, 'Martin Correa', '1995-02-10'),(29888999, 'Mario Sosa', '1982-09-30'),
@@ -42,7 +42,7 @@ BEGIN
     FROM @Datos
     ORDER BY NEWID();  -- Aleatorio
 
-    -- Modificar el DNI para que sea único
+    -- Modificar el DNI para que sea Ãºnico
     SET @BaseDNI = @BaseDNI + @Counter;
 
     -- Insertar el nuevo registro con variaciones
@@ -63,9 +63,9 @@ END
 
 select * from HUESPEDES
 
---La condición completa @Counter <= (@MaxRecords - (SELECT COUNT(*) FROM @Datos)) 
---significa que el bucle continuará ejecutándose mientras el contador (@Counter) 
---sea menor o igual a la cantidad de registros que aún se pueden insertar.
+--La condiciÃ³n completa @Counter <= (@MaxRecords - (SELECT COUNT(*) FROM @Datos)) 
+--significa que el bucle continuarÃ¡ ejecutÃ¡ndose mientras el contador (@Counter) 
+--sea menor o igual a la cantidad de registros que aÃºn se pueden insertar.
 
 
 --BUSCAMOS UN RANGO DE FECHAS DE MAYOR A MENOR "NO TIENEN INDICE"
@@ -75,7 +75,7 @@ ORDER BY FECHA_NACIMIENTO ASC
 SELECT TOP 1 FECHA_NACIMIENTO from HUESPEDES
 ORDER BY FECHA_NACIMIENTO DESC
 
---Consulta Inicial sin Índice, ASIQUE ELIMINAMOS PRIMERO NUESTRA CLAVE PRIMARIA EN HUESPEDES
+--Consulta Inicial sin Ãndice, ASIQUE ELIMINAMOS PRIMERO NUESTRA CLAVE PRIMARIA EN HUESPEDES
 
 ALTER TABLE HUESPEDES
 DROP CONSTRAINT PK_DNI_HUESPED
@@ -89,14 +89,14 @@ ADD CONSTRAINT PK_DNI_HUESPED PRIMARY KEY (DNI)
 
                         /******************CONSULTA SIN INDICES*****************/
 
-SET SHOWPLAN_ALL ON;-- Habilitar el plan de ejecución para la consulta sin índice
+SET SHOWPLAN_ALL ON;-- Habilitar el plan de ejecuciÃ³n para la consulta sin Ã­ndice
 go
 SELECT * 
 FROM HUESPEDES 
 WHERE FECHA_NACIMIENTO BETWEEN '1978-11-05' AND '2011-11-20'
 ORDER BY FECHA_NACIMIENTO
 go
-SET SHOWPLAN_ALL OFF;-- Deshabilitar el plan de ejecución
+SET SHOWPLAN_ALL OFF;-- Deshabilitar el plan de ejecuciÃ³n
 go
 
 SET STATISTICS TIME ON;
@@ -115,17 +115,17 @@ SET STATISTICS IO OFF;
                       /******************CONSULTA CON INDICE AGRUPADO******************/
 
 ----CREAR UN INDICE DE FECHA---
--- Crear un índice agrupado sobre la columna FECHA_NACIMIENTO
+-- Crear un Ã­ndice agrupado sobre la columna FECHA_NACIMIENTO
 CREATE CLUSTERED INDEX idx_fecha_nacimiento ON HUESPEDES(FECHA_NACIMIENTO);
 
-SET SHOWPLAN_ALL ON;-- Habilitar el plan de ejecución para la consulta sin índice
+SET SHOWPLAN_ALL ON;-- Habilitar el plan de ejecuciÃ³n para la consulta sin Ã­ndice
 go
 SELECT * 
 FROM HUESPEDES 
 WHERE FECHA_NACIMIENTO BETWEEN '1978-11-05' AND '2011-11-20'
 ORDER BY FECHA_NACIMIENTO
 go
-SET SHOWPLAN_ALL OFF;-- Deshabilitar el plan de ejecución
+SET SHOWPLAN_ALL OFF;-- Deshabilitar el plan de ejecuciÃ³n
 go
 
 --Ejecucion con indice agrupado
@@ -145,20 +145,20 @@ DROP INDEX idx_fecha_nacimiento ON HUESPEDES;
 
 
 
-                        /******************CONSULTA SIN INDICES NO AGRUPADOS**************/
+                        /******************CONSULTA CON INDICES NO AGRUPADOS**************/
 
--- Crear un índice no agrupado que incluya columnas
+-- Crear un Ã­ndice no agrupado que incluya columnas
 CREATE NONCLUSTERED INDEX idx_fecha_nacimiento_dato ON HUESPEDES(FECHA_NACIMIENTO)
 INCLUDE (NOMBRE_APELLIDO);
 
-SET SHOWPLAN_ALL ON;-- Habilitar el plan de ejecución para la consulta sin índice
+SET SHOWPLAN_ALL ON;-- Habilitar el plan de ejecuciÃ³n para la consulta sin Ã­ndice
 go
 SELECT * 
 FROM HUESPEDES 
 WHERE FECHA_NACIMIENTO BETWEEN '1978-11-05' AND '2011-11-20'
 ORDER BY FECHA_NACIMIENTO
 go
-SET SHOWPLAN_ALL OFF;-- Deshabilitar el plan de ejecución
+SET SHOWPLAN_ALL OFF;-- Deshabilitar el plan de ejecuciÃ³n
 go
 
 --Ejecucion con indices no agrupado
