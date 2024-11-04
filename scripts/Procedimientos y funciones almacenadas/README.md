@@ -183,8 +183,7 @@ Las funciones de sistema son funciones predefinidas que permiten acceder a infor
 
 - Mantenimiento Simplificado: Actualizar la lógica de negocio solo requiere modificar la función en un solo lugar, lo que mejora la consistencia y simplifica el mantenimiento en el código de la aplicación.
   ## CONCLUSION
-Los procedimientos almacenados se usan principalmente para ejecutar tareas o acciones en la base de datos, mientras que las funciones están más enfocadas en realizar cálculos o transformar datos que se pueden integrar en consultas SQL. 
-
+Una función puede ser llamada en un SELECT, WHERE, o cualquier otra parte de una consulta, lo que facilita la manipulación de datos de manera dinámica. Mientras que en un procedimineto almacenado se utilizan para ejecutar operaciones como inserciones, actualizaciones, eliminaciones, o cualquier acción que implique cambios en los datos o en su estructura.
  
 ## Tareas:
 
