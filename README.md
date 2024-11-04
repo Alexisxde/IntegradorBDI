@@ -47,35 +47,43 @@ En este caso de estudio buscamos ofrecer una solución tecnológica que simplifi
 
 ## CAPITULO II: MARCO CONCEPTUAL O REFERENCIAL
 
-Contiene las referencias fundamentales sobre la cual se erigirá el trabajo, los fundamentos y las
-especificaciones que permitirán comprender mejor el problema planteado o bien el de marco
-conceptual por cuanto tiene el propósito de expresar un sistema coordinado y coherente de
-conceptos y proposiciones que explicaran mejor la investigación que realizamos. Se trata de
-situar a nuestro problema dentro de un conjunto de conocimientos – los más sólidos posibles -,
-de tal modo que permitan orientar nuestra búsqueda y nos ofrezcan una conceptualización
-adecuada de los términos que utilizamos. En nuestro caso: Innovaciones Tecnológicas, TICs,
-Globalización, Crecimiento, Desarrollo Regional o Local, cadenas productivas, clusters,
-desarrollo sustentable, etc.
+En la actualidad, resulta impensable gestionar un hotel sin el uso de tecnologías. Estas han permitido a los hoteles automatizar procesos clave como la reserva de habitaciones, el control de inventarios, la facturación y la gestión de clientes, lo que mejora significativamente la eficiencia operativa, reduce costos y aumenta la satisfacción del cliente.
+
+Aunque el factor humano sigue siendo esencial en áreas como la recepción, donde los empleados corroboran datos y supervisan que todo funcione correctamente, la tendencia hacia la automatización es cada vez más fuerte. En el futuro, es posible que la estructura organizativa de los hoteles cambie de manera drástica, reduciendo la intervención humana y adoptando sistemas automatizados en mayor medida.
+
+En este contexto, el uso de SQL Server, un motor de bases de datos relacionales, juega un papel fundamental. SQL Server permite almacenar y procesar grandes volúmenes de datos relacionados con la operación hotelera, tales como la información de huéspedes, reservas, servicios y personal, de manera eficiente y organizada.
+
+Nuestro caso de estudio utiliza SQL Server como motor de base de datos relacional que estructura la información en tablas interrelacionadas. Entre las principales tablas que forman parte del sistema se encuentran las de huéspedes, habitaciones, reservas, servicios y empleados. Cada tabla está diseñada para almacenar datos de manera eficiente, lo que facilita la gestión de las distintas operaciones del hotel.
+
+Los sistemas al integrarse en la administración hotelera, no solo permiten una gestión más eficiente de los recursos, sino que también agilizan la toma de decisiones. En nuestro caso, SQL Server provee una infraestructura robusta que permite acceder y gestionar la información de forma ágil, segura y escalable, lo cual es crucial en la operación diaria de un hotel.
+
+El uso de tecnologías como SQL Server no solo optimiza la gestión interna, sino que también facilita la expansión de las cadenas hoteleras en un entorno globalizado. Un sistema bien estructurado, con bases de datos relacionales y acceso remoto, permite la centralización de la gestión de múltiples hoteles en diferentes regiones. Además, la capacidad de acceder a datos en tiempo real facilita la toma de decisiones informadas, lo que impulsa el desarrollo regional y mejora la competitividad, adaptándose a las necesidades locales de manera eficiente.
 
 ## CAPÍTULO III: METODOLOGÍA SEGUIDA
-
-En este capítulo se presenta el plan seguido o las acciones llevadas a cabo para realizar el trabajo,
-las dificultades encontradas, y cualquier otra información que proporcione la idea de cómo se
-realizó el trabajo.
-A fin de dar una idea de la metodología seguida, se deben observar los siguientes puntos:
-
-### Descripción de cómo se realizó el Trabajo Práctico
-
-Descripción de los pasos seguidos para realizar el trabajo, las actividades realizadas y
-cualquier otra información que ayude a tener una idea del esfuerzo desplegado por el
-alumno para la realización del trabajo.
+Nuestro caso de estudio se dividió en 7 fases, las cuales se detallan a continuación:
+### Fases del desarrollo
+* Fase de elección de caso de estudio: Para escoger el tema que usaríamos en el caso de estudio, cada integrante proporcionó un tema de su interés, luego tuvimos una votación para quedarnos con un solo tema, la votación terminó en empate con dos temas: **Gestión de una universidad** y **Administración de un hotel**. Como no podíamos decidirnos, consultamos con nuestros profesores sobre cual tema sería más atractivo, donde la mayoría eligió el tema del hotel, decidiéndonos finalmente por este.
+* Fase del diseño conceptual: Durante esta fase tuvimos multiples reuniones virtuales y presenciales para poder elaborar el diagrama conceptual de la futura base de datos, mediante una lluvia de ideas fuimos agregando las entidades al diagrama, luego, entre todos los integrantes discutimos si tenía sentido lo que agregábamos y como poder relacionarlo con las demás entidades, quedándonos con las más importantes.
+* Fase del diseño Modelo Entidad-Relacion (ER): Una vez que tuvimos listo el concepto de nuestra base de datos, procedimos a diseñar un diagrama entidad-relación en el que detallamos cada entidad y sus relaciones. En este proceso participamos todo el grupo para poder tomar en cuenta todas las opiniones y perspectivas posibles, para hacerlo lo más realista posible y acorde a nuestros objetivos.
+* Fase de desarrollo: En esta fase están reunidas todas las fases de desarrollo individual de cada integrante respecto a su tema, cada fase a su vez se dividió en dos: **desarrollo de script** y **creación de documentación**. A continuación, enumeramos las fases de desarrollo:
+1. **Manejo de permisos a nivel de usuarios de base de datos.**
+2. **Procedimientos y funciones almacenadas.**
+3. **Optimización de consultas a través de índices.**
+4. **Triggers.**
+* Fase de explicación de temas: Luego de tener todo los scripts ya terminados, tuvimos una reunión para que cada integrante diera una "exposición" sobre su tema, sobre cómo realizó el script, lo más importante de su tema, y cualquier cosa relevante que quiera compartir a los demás integrantes. Esto se hizo con el propósito de que todo el grupo estuviera informado sobre los temas abordados en el caso de estudio.
+* Fase de pruebas: Cuando ya se encontraba todo finalizado, realizamos un conjunto de pruebas a todo el sistema completo para corroborar que no hubiera ninguna falla o error, ingresando valores esperados y no esperados, para contemplar todos los posibles resultados.
+* Fase final y entrega: Para esta fase nos reunimos todos los integrantes y verificamos punto por punto todo el repositorio, documentación y código. Para corregir cualquier falla o error que pudiera haberse pasado por alto.
 
 ### Herramientas (Instrumentos y procedimientos)
 
-Descripción de los instrumentos y procedimientos utilizados para la recolección y
-tratamiento de la información. El alumno debe mencionar con qué método obtuvo los
-datos; por ej., a través de entrevistas, de revisión bibliográfica, de Internet, etc.
+Nuestra principal fuente de información fue internet, para la obtención de información sobre el motor SQL Server, utilizamos la [documentación oficial](https://learn.microsoft.com/es-mx/sql/sql-server/?view=sql-server-ver16) de Microsoft, para investigar más sobre T-SQL.
 
+En la elaboración de nuestro caso de estudio, utilizamos las siguientes herramientas:
+- [ERD Plus](https://erdplus.com/):Una sencilla pero potente herramienta para modelado de bases de datos, teniendo herramientas para crear diagramas relacionales,conceptuales, y          código SQL. ERD Plus nos permitió modelar el esquema conceptual.
+- [ChartDB](https://chartdb.io/):Una herramienta gratis y de código abierto para diseñar bases de datos,entre sus caracteristicas está importar,expotar,editar y crear diagramas relacionales. ChartDB nos permitió modelar el esquema relacional de nuestra base de datos y exportar el modelo a SQL.
+- [SQL Server Management Studio 20](https://www.microsoft.com/es-ar/sql-server/sql-server-downloads): Una herramienta de gestión y administración de bases de datos desarrollada por Microsoft, específicamente diseñada para trabajar con SQL Server, entre otros lenguajes.
+- [Sintaxis de escritura y formato basicos de Github](https://docs.github.com/es/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax):Documentación oficial de Github para crear formatos sofisticados con sintaxis simple. La utilizamos en la creación de documentación.
+  
 ## CAPÍTULO IV: DESARROLLO DEL TEMA / PRESENTACIÓN DE RESULTADOS
 
 ### Diagrama conceptual
