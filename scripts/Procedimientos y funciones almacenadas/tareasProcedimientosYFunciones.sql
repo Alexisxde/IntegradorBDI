@@ -2,7 +2,7 @@
 -- 1) Realizar al menos tres procedimientos almacenados que permitan: Insertar, Modificar y borrar registros de alguna de las tablas del proyecto.
 --- PROCEDIMIENTOS ALMACENADOS PARA INSERTAR, MODIFICAR Y BORRAR REGISTROS MEDIANTE PROCEDIMIENTO ALMACENADO.
 
-CREATE PROCEDURE isertarHuesped
+CREATE PROCEDURE insertarHuesped
   @DNI INT,
   @NombreApellido VARCHAR(50),
   @FechaNacimiento DATE
@@ -105,7 +105,7 @@ SELECT * FROM HUESPEDES WHERE DNI = 12345678;
 
 SELECT dbo.nombreCompletoHuesped(12345678) AS NombreCompleto;
 
--- INSERSIONES
+-- INSERCIONES
 INSERT INTO HUESPEDES (DNI, NOMBRE_APELLIDO, FECHA_NACIMIENTO)
 VALUES (65432109, 'Julia Navarro', '1991-04-30');
 
