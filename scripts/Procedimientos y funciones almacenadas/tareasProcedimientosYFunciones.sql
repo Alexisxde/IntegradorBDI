@@ -1,4 +1,6 @@
--- 1. PROCEDIMIENTOS ALMACENADOS PARA INSERTAR, MODIFICAR Y BORRAR REGISTROS MEDIANTE PROCEDIMIENTO ALMACENADO.
+--TAREAS
+-- 1) Realizar al menos tres procedimientos almacenados que permitan: Insertar, Modificar y borrar registros de alguna de las tablas del proyecto.
+--- PROCEDIMIENTOS ALMACENADOS PARA INSERTAR, MODIFICAR Y BORRAR REGISTROS MEDIANTE PROCEDIMIENTO ALMACENADO.
 
 CREATE PROCEDURE isertarHuesped
   @DNI INT,
@@ -30,8 +32,8 @@ BEGIN
   WHERE DNI = @DNI;
 END;
 
-
--- 2. INSERCIÓN DE DATOS (LOTE) USANDO SENTENCIAS INSERT Y PROCEDIMIENTOS
+-- 2) Insertar un lote de datos en las tablas mencionadas (guardar el script) con sentencias insert y otro lote invocando a los procedimientos creados.
+-- INSERCIÓN DE DATOS (LOTE) USANDO SENTENCIAS INSERT Y PROCEDIMIENTOS
 
 INSERT INTO HUESPEDES (DNI, NOMBRE_APELLIDO, FECHA_NACIMIENTO)
 VALUES 
@@ -44,14 +46,14 @@ EXEC insertarHuesped @DNI = 56789012, @NombreApellido = 'Walter Vallejos', @Fech
 EXEC insertarHuesped @DNI = 23456789, @NombreApellido = 'Juan Cuzziol', @FechaNacimiento = '1995-12-03';
 EXEC insertarHuesped @DNI = 34567890, @NombreApellido = 'Dario Villegas', @FechaNacimiento = '1987-03-22';
 
-
--- 3. ACTUALIZAR Y ELIMINAR REGISTROS USANDO PROCEDIMIENTOS
+-- Realizar update y delete sobre algunos de los registros insertados en esas tablas invocando a los procedimientos.}
+-- ACTUALIZAR Y ELIMINAR REGISTROS USANDO PROCEDIMIENTOS
 
 EXEC modificarHuesped @DNI = 12345678, @NuevoNombreApellido = 'Chenzo Lopez', @NuevaFechaNacimiento = '1980-05-16';
 EXEC borrarHuesped @DNI = 87654321;
 
-
--- 4. FUNCIONES ALMACENADAS
+-- Desarrollar al menos tres funciones almacenadas. Por ej: calcular la edad.
+--  FUNCIONES ALMACENADAS
 
 -- Función para calcular la edad según la fecha de nacimiento
 CREATE FUNCTION calcularEdad (@FechaNacimiento DATE)
@@ -91,8 +93,8 @@ RETURN
         NOMBRE
     FROM CARGOS
 );
-
--- 5. COMPARACIÓN DE EFICIENCIA ENTRE OPERACIONES DIRECTAS Y PROCEDIMIENTOS/FUNCIONES
+-- 5) Comparar la eficiencia de las operaciones directas versus el uso de procedimientos y funciones.
+-- COMPARACIÓN DE EFICIENCIA ENTRE OPERACIONES DIRECTAS Y PROCEDIMIENTOS/FUNCIONES
 
 -- Visualizar estadisticas de tiempo real
 SET STATISTICS TIME ON;
