@@ -18,7 +18,7 @@ La única vez que las filas de datos en una tabla se almacenan en orden ordenado
 CREATE CLUSTERED INDEX idx_fecha_nacimiento ON HUESPEDES(FECHA_NACIMIENTO);
 ```
 
-##### **Borrar indice creado**
+- Borrar indice creado
 
 ```SQL
 DROP INDEX idx_fecha_nacimiento ON HUESPEDES;
@@ -42,7 +42,7 @@ CREATE NONCLUSTERED INDEX idx_fecha_nacimiento_dato ON HUESPEDES(FECHA_NACIMIENT
 INCLUDE (NOMBRE_APELLIDO);
 ```
 
-##### **Borrar indice creado**
+- Borrar indice creado
 
 ```SQL
 DROP INDEX idx_fecha_nacimiento_dato ON HUESPEDES;
@@ -66,14 +66,21 @@ Uso de Espacio:
 Índice Agrupado: Al estar directamente ligado a las filas de datos, el índice agrupado no requiere espacio adicional más allá de los datos en sí.
 Índice No Agrupado: Requiere espacio adicional en disco, ya que los datos del índice y los datos de la tabla están separados.
 
-> [!CAUTION]
-> La tarea va en el script.sql Enzo.
-
 ## Tareas:
 
 - Realizar una carga masiva de por lo menos un millón de registro sobre alguna tabla que contenga un campo fecha (sin índice). Hacerlo con un script para poder automatizarlo.
 
-(ver script para entender mejor los pasos)
+Se han insertado 1 millon de registros en la tabla HUESPEDES en el script de Optimizacion_indices.sql
+
+El bucle WHILE se ejecuta hasta que @Counter sea mayor que la diferencia entre @MaxRecords y el número actual de registros en @Datos.
+
+Se selecciona un registro aleatorio de @Datos usando ORDER BY NEWID(). Luego, se asignan a las variables @BaseDNI, @BaseNombre y @BaseFecha los valores de DNI, nombre y fecha de nacimiento del registro seleccionado.
+
+Para asegurar que cada registro tenga un DNI único, se incrementa @BaseDNI sumándole el valor de @Counter.
+
+Se inserta un nuevo registro en HUESPEDES, copiando @BaseNombre, el DNI modificado (@BaseDNI), y una fecha de nacimiento variada. La fecha es alterada aleatoriamente dentro de un rango de 365 días usando DATEADD y RAND().
+
+Actualización del Contador: Finalmente, @Counter aumenta en 1, acercando el ciclo a su límite.
 
 - Realizar una búsqueda por periodo y registrar el plan de ejecución utilizado por el motor y los tiempos de respuesta.
 
