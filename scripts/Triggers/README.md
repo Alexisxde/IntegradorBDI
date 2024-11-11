@@ -2,9 +2,9 @@
 
 ## **¿Qué es un trigger en SQL?**
 
-Un trigger es un procedimiento almacenado en la base de datos que se ejecuta automáticamente cada vez que ocurre un evento especial en la base de datos. Por ejemplo, un desencadenante puede activarse cuando se inserta una fila en una tabla específica o cuando ciertas columnas de la tabla se actualizan.
+Un trigger es un procedimiento almacenado en la base de datos que se ejecuta automáticamente cada vez que ocurre un evento especial en la base de datos. Por ejemplo, un desencadenante puede activarse cuando se inserta una fila en una tabla específica.
 
-Por lo general, estos eventos que desencadenan los triggers son cambios en las tablas mediante operaciones de inserción, eliminación y actualización de datos (insert, delete y update).
+Por lo general, estos eventos que desencadenan los triggers son cambios en las tablas mediante operaciones de inserción, eliminación y actualización de datos (INSERT, DELETE y UPDATE).
 
 ## **Hay dos clases de Triggers en SQL**
 
@@ -22,7 +22,7 @@ La instrucción **CREATE TRIGGER** permite crear un nuevo trigger que se activa 
 
 ```SQL
 CREATE TRIGGER nombre_trigger
-ON nombre_tabla AFTER (INSERT o UPDATE o DELETE) AS SET NOCOUNT ON
+ON nombre_tabla AFTER (INSERT o UPDATE o DELETE) AS
 BEGIN
   -- SQL
 END;
@@ -44,7 +44,7 @@ END;
 - Útiles cuando quieres anular o modificar el comportamiento predeterminado de la operación, o cuando quieres controlar complejamente qué datos se insertan o actualizan.
 
 > [!CAUTION]
-> La sentencia `TRUNCATE` no ejecutará ningun `TRIGGER`
+> La sentencia `TRUNCATE` no ejecutará ningún `TRIGGER`
 
 ## **Pseudotablas `INSERTED` y `DELETED`**
 
@@ -177,10 +177,10 @@ Después del `SET NOCOUNT ON`
 Completion time: 2024-11-02T18:26:55.4199633-03:00
 ```
 
-## **Resumen y consejos para utilizar `TRIGGER`**:
+## Tareas
 
-En resumen un TRIGGER sirve para:
+> Ver el script para entender más [script.sql](script.sql)
 
-- Ejecutar un código SQL cuando ocurra un evento en concreto: **`INSERT`** o **`UPDATE`** o **`DELETE`**.
-- Ayudar a mantener la integridad de la información
-- Manipular la información de una consulta en concreto ANTES o DESPUES de su ejecución.
+## **Conclusión General**
+
+Los triggers de auditoría permiten mantener un historial de cambios y eliminaciones en los datos de manera efectiva, mientras que el trigger de restricción de eliminación asegura la integridad de datos en la tabla `RESERVAS`. Esto demuestra que la implementación de estos mecanismos cumple con los objetivos de monitoreo y control de integridad establecidos para el sistema de bases de datos.
