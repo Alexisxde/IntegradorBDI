@@ -15,10 +15,8 @@ El inicio de sesión permite acceder al servidor SQL, mientras que el usuario de
 Se puede usar la interfaz que brinda SQL Server o usando Transact SQL (T-SQL), el cual es una variante del SQL estandar, diseñada especificamente para SQL Server. Nosotros utilizamos lenguaje T-SQL. Se utilizan las siguientes clausulas:
 
 ```SQL
-/*Creamos un inicio de sesión*/
-CREATE LOGIN NombreUsuario WITH PASSWORD = 'Contraseña';
-/*Creamos un usuario y lo vinculamos con el inicio de sesión creado*/
-CREATE USER NombreUsuario FOR LOGIN NombreUsuario;
+CREATE LOGIN NombreUsuario WITH PASSWORD = 'Contraseña'; -- Creamos un inicio de sesión.
+CREATE USER NombreUsuario FOR LOGIN NombreUsuario; -- Creamos un usuario y lo vinculamos con el inicio de sesión creado.
 ```
 
 ## **¿Qué es una base de datos contenida?**
@@ -29,19 +27,19 @@ Es una base de datos que gestiona por sí misma a sus propios usuarios y autenti
 
 Son derechos que se pueden otorgar a un usuario, estos determinan lo que tiene o no tiene permitido hacer en la base de datos. Alguno de los permisos más usados son los siguientes:
 
-- SELECT: Permite ver o consultar datos (leer información de una tabla).
-- INSERT: Permite agregar nuevos registros a una tabla.
-- UPDATE: Permite modificar registros existentes.
-- DELETE: Permite eliminar registros de una tabla.
-- EXECUTE: Permite ejecutar procedimientos almacenados
+- `SELECT`: Permite ver o consultar datos (leer información de una tabla).
+- `INSERT`: Permite agregar nuevos registros a una tabla.
+- `UPDATE`: Permite modificar registros existentes.
+- `DELETE`: Permite eliminar registros de una tabla.
+- `EXECUTE`: Permite ejecutar procedimientos almacenados
 
 Para otorgar algún permiso usando T-SQL, se usan las siguientes clausulas:
 
 ```SQL
-/*Asignamos el permiso de insertar al usuario Gerente_Carlos*/
-GRANT INSERT /*Se puede otorgar más de un permiso, separandolos con coma*/
-ON dbo.CARGOS /*Se selecciona la tabla especifica*/
-to GERENTE_CARLOS; /*Se escribe el usuario al que se le asigna el permiso, sin comillas simples*/
+-- Asignamos el permiso de insertar al usuario Gerente_Carlos.
+GRANT INSERT -- Se puede otorgar más de un permiso, separandolos con coma.
+ON dbo.CARGOS -- Se selecciona la tabla especifica.
+TO GERENTE_CARLOS; -- Se escribe el usuario al que se le asigna el permiso, sin comillas simples.
 ```
 
 ## **¿Qué son y cómo se otorgan los roles?**
@@ -58,14 +56,10 @@ SQL Server brinda de forma predeterminada una amplia lista de roles, entre los m
 Para otorgar estos permisos usamos las siguientes clausulas:
 
 ```SQL
-/*Seleccionamos la base de datos donde queremos que se cree el rol*/
-USE ADMINISTRACION_HOTEL;
-/*Creamos el rol*/
-CREATE ROLE SUPERVISORES;
-/*Le asignamos los permisos de lectura en la tabla CARGOS*/
-GRANT SELECT ON dbo.CARGOS TO SUPERVISORES;
-/*Agregamos un usuario al rol creado */
-ALTER ROLE SUPERVISORES ADD MEMBER SUPERVISOR_FACUNDO;
+USE ADMINISTRACION_HOTEL; -- Seleccionamos la base de datos donde queremos que se cree el rol.
+CREATE ROLE SUPERVISORES; -- Creamos el rol.
+GRANT SELECT ON dbo.CARGOS TO SUPERVISORES; -- Le asignamos los permisos de lectura en la tabla CARGOS.
+ALTER ROLE SUPERVISORES ADD MEMBER SUPERVISOR_FACUNDO; -- Agregamos un usuario al rol creado.
 ```
 
 ## Tareas
