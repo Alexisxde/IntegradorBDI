@@ -177,7 +177,7 @@ Después del `SET NOCOUNT ON`
 Completion time: 2024-11-02T18:26:55.4199633-03:00
 ```
 
-## Tareas
+## **Tareas**
 
 > Ver el script para entender más [script.sql](script.sql)
 

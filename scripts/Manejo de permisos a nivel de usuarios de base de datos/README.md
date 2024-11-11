@@ -62,7 +62,7 @@ GRANT SELECT ON dbo.CARGOS TO SUPERVISORES; -- Le asignamos los permisos de lect
 ALTER ROLE SUPERVISORES ADD MEMBER SUPERVISOR_FACUNDO; -- Agregamos un usuario al rol creado.
 ```
 
-## Tareas
+## **Tareas**
 
 > Ver el script para entender más [script.sql](script.sql)
 

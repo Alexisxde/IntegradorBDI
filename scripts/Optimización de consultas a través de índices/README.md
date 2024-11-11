@@ -48,7 +48,7 @@ INCLUDE (NOMBRE_APELLIDO);
 DROP INDEX idx_fecha_nacimiento_dato ON HUESPEDES;
 ```
 
-## Tareas
+## **Tareas**
 
 > Ver el script para entender más [script.sql](script.sql)
 

@@ -1,6 +1,6 @@
 # Tema: Procedimientos y funciones almacenadas
 
-## INTRODUCCION
+## **Introducción**
 
 En SQL Server, los procedimientos almacenados y las funciones son herramientas clave que permiten optimizar y organizar las operaciones que se realizan en una base de datos.
 
@@ -8,11 +8,11 @@ Los procedimientos almacenados se utilizan principalmente para ejecutar tareas e
 
 Las funciones están diseñadas para realizar cálculos o transformaciones que se pueden aplicar directamente en consultas SQL. Esto significa que una función puede ser llamada en un SELECT, WHERE o cualquier otra parte de una consulta, facilitando la manipulación de datos de manera dinámica. Sin embargo, a diferencia de los procedimientos restricciones: no pueden modificar datos en la base de datos y están limitadas a solo leer datos. Este diseño asegura que sean seguras de utilizar en consultas sin causar efectos secundarios no deseados en la base de datos.
 
-## ¿QUE ES UN PROCEDIMIENTO ALMACENADO?
+## **¿Qué es un procedimiento almacenado?**
 
 Los procedimientos almacenados son bloques de instrucciones T-SQL que se almacenan en el servidor de bases de datos y se ejecutan para realizar tareas específicas. Son una herramienta poderosa para encapsular lógica de negocio en la base de datos y reducir la duplicación de código en aplicaciones que interactúan con ella.
 
-## TIPOS DE PROCEDIMIENTO ALMACENADOS
+## **Tipos de procedimientos almacenados**
 
 ### `1. Definidos por el Usuario`
 
@@ -20,19 +20,17 @@ Estos procedimientos son creados por los usuarios para ejecutar tareas específi
 
 ```SQL
 CREATE PROCEDURE CrearReserva
-    @id_cliente INT,
-    @id_habitacion INT,
-    @fecha_inicio DATE,
-    @fecha_fin DATE,
-    @monto_total DECIMAL(10, 2)
+  @id_cliente INT,
+  @id_habitacion INT,
+  @fecha_inicio DATE,
+  @fecha_fin DATE,
+  @monto_total DECIMAL(10, 2)
 AS
 BEGIN
-    SET NOCOUNT ON;
-
-    INSERT INTO Reservas (id_cliente, id_habitacion, fecha_inicio, fecha_fin, monto_total)
-    VALUES (@id_cliente, @id_habitacion, @fecha_inicio, @fecha_fin, @monto_total);
+  SET NOCOUNT ON;
+  INSERT INTO Reservas (id_cliente, id_habitacion, fecha_inicio, fecha_fin, monto_total)
+  VALUES (@id_cliente, @id_habitacion, @fecha_inicio, @fecha_fin, @monto_total);
 END;
-
 ```
 
 ### `2. Temporales`
@@ -43,36 +41,36 @@ Los procedimientos temporales son una variante de los procedimientos definidos p
 
 ```SQL
 CREATE PROCEDURE #VerificarDisponibilidad
-    @id_habitacion INT,
-    @fecha_inicio DATE,
-    @fecha_fin DATE
+  @id_habitacion INT,
+  @fecha_inicio DATE,
+  @fecha_fin DATE
 AS
 BEGIN
-    SELECT CASE
-        WHEN EXISTS (
-            SELECT 1
-            FROM Reservas
-            WHERE id_habitacion = @id_habitacion
-              AND (@fecha_inicio BETWEEN fecha_inicio AND fecha_fin
-                   OR @fecha_fin BETWEEN fecha_inicio AND fecha_fin)
+  SELECT CASE
+    WHEN EXISTS (
+      SELECT 1
+      FROM Reservas
+      WHERE id_habitacion = @id_habitacion
+        AND (
+          @fecha_inicio BETWEEN fecha_inicio AND fecha_fin
+            OR @fecha_fin BETWEEN fecha_inicio AND fecha_fin
         )
-        THEN 'Ocupada'
-        ELSE 'Disponible'
-    END AS Disponibilidad;
+    )
+  THEN 'Ocupada'
+  ELSE 'Disponible'
+  END AS Disponibilidad;
 END;
 ```
 
 - De manera global:
 
 ```SQL
-CREATE PROCEDURE ##TotalReservasActivas
-AS
+CREATE PROCEDURE ##TotalReservasActivas AS
 BEGIN
-    SELECT COUNT(*) AS TotalReservasActivas
-    FROM Reservas
-    WHERE fecha_fin >= GETDATE();
+  SELECT COUNT(*) AS TotalReservasActivas
+  FROM Reservas
+  WHERE fecha_fin >= GETDATE();
 END;
-
 ```
 
 ### `3. Sistema`
@@ -81,7 +79,6 @@ Los procedimientos del sistema son parte del motor de SQL Server y están almace
 
 ```SQL
 EXEC sp_help 'Reservas';
-
 ```
 
 ### `4. Extendidos Definidos por el Usuario`
@@ -90,11 +87,10 @@ Los procedimientos extendidos permiten ejecutar código externo, como biblioteca
 Para procedimientos extendidos, un ejemplo puede ser el uso de xp_cmdshell para listar los archivos de registro del sistema en los que se podría almacenar información de auditoría de reservas. Este tipo de procedimiento requiere habilitación y permisos específicos.
 
 ```SQL
-
 EXEC xp_cmdshell 'dir C:\RegistrosReservas\';
 ```
 
-## VENTAJAS DEL USO DE PROCEDIMIENTOS ALMACENADOS
+## **Ventajas del uso de procedimientos almacenados**
 
 1. **Reducción del tráfico de red**: Los procedimientos almacenados permiten ejecutar múltiples comandos en un solo envío desde el cliente al servidor, lo cual reduce el tráfico en la red y mejora el rendimiento, especialmente en aplicaciones con alta frecuencia de solicitudes.
 
@@ -106,11 +102,11 @@ EXEC xp_cmdshell 'dir C:\RegistrosReservas\';
 
 5. **Mejora de rendimiento**: Los procedimientos se compilan en su primera ejecución y reutilizan un plan de ejecución, optimizando el tiempo de procesamiento en cada llamada.
 
-## ¿QUE ES UNA FUNCION ALMACENADA?
+## **¿Qué es una función almacenada?**
 
 Las funciones almacenadas (o funciones definidas por el usuario) son objetos de la base de datos que permiten encapsular lógica de negocio o cálculos en una función que puede ser reutilizada en diferentes consultas y procesos. A diferencia de los procedimientos almacenados, las funciones deben devolver un valor y pueden ser utilizadas en las consultas de SQL, como en las cláusulas `SELECT`, `WHERE`, y `JOIN`.
 
-## TIPOS DE FUNCIONES ALMACENADAS
+## **Tipos de funciones almacenadas**
 
 ### `1. Funciones Escalares`
 
@@ -119,19 +115,15 @@ Las funciones escalares devuelven un solo valor de un tipo de datos específico,
 ```SQL
 
 CREATE FUNCTION dbo.CalcularEdad(@FechaNacimiento DATETIME)
-RETURNS INT
-AS
+RETURNS INT AS
 BEGIN
-    DECLARE @Edad INT;
-    SET @Edad = DATEDIFF(YEAR, @FechaNacimiento, GETDATE());
-
-    IF (MONTH(@FechaNacimiento) > MONTH(GETDATE()) OR
-        (MONTH(@FechaNacimiento) = MONTH(GETDATE()) AND DAY(@FechaNacimiento) > DAY(GETDATE())))
-    BEGIN
-        SET @Edad = @Edad - 1;
-    END
-
-    RETURN @Edad;
+  DECLARE @Edad INT;
+  SET @Edad = DATEDIFF(YEAR, @FechaNacimiento, GETDATE());
+  IF (MONTH(@FechaNacimiento) > MONTH(GETDATE()) OR (MONTH(@FechaNacimiento) = MONTH(GETDATE()) AND DAY(@FechaNacimiento) > DAY(GETDATE())))
+  BEGIN
+    SET @Edad = @Edad - 1;
+  END
+  RETURN @Edad;
 END;
 ```
 
@@ -140,15 +132,11 @@ END;
 Las funciones en línea que devuelven valores de tabla son funciones que devuelven una tabla (set de resultados) en función de una sola instrucción de consulta. Estas funciones son similares a las vistas pero ofrecen la ventaja de aceptar parámetros, lo que permite un mayor control sobre los datos devueltos.
 
 ```SQL
-
 CREATE FUNCTION dbo.ObtenerReservasCliente(@NombreCliente VARCHAR(50))
-RETURNS TABLE
-AS
-RETURN
-(
-    SELECT ID_RESERVA, FECHA_LLEGADA, FECHA_SALIDA, ID_ESTADO
-    FROM RESERVAS
-    WHERE NOMBRE_APELLIDO = @NombreCliente
+RETURNS TABLE AS RETURN (
+  SELECT ID_RESERVA, FECHA_LLEGADA, FECHA_SALIDA, ID_ESTADO
+  FROM RESERVAS
+  WHERE NOMBRE_APELLIDO = @NombreCliente
 );
 ```
 
@@ -157,25 +145,21 @@ RETURN
 A diferencia de las funciones en línea, las funciones multidefinidas con valores de tabla permiten utilizar varias sentencias de control de flujo (como IF, WHILE, y DECLARE). Este tipo de función devuelve una tabla como resultado, pero su lógica es más compleja, ya que permite múltiples pasos antes de devolver los datos.
 
 ```SQL
-
 CREATE FUNCTION dbo.ObtenerReservasActivas(@FechaInicio DATETIME, @FechaFin DATETIME)
-RETURNS @Reservas TABLE
-(
-    ID_RESERVA INT,
-    NOMBRE_APELLIDO VARCHAR(50),
-    FECHA_LLEGADA DATETIME,
-    FECHA_SALIDA DATETIME
-)
-AS
+RETURNS @Reservas TABLE (
+  ID_RESERVA INT,
+  NOMBRE_APELLIDO VARCHAR(50),
+  FECHA_LLEGADA DATETIME,
+  FECHA_SALIDA DATETIME
+) AS
 BEGIN
-    INSERT INTO @Reservas
-    SELECT ID_RESERVA, NOMBRE_APELLIDO, FECHA_LLEGADA, FECHA_SALIDA
-    FROM RESERVAS
-    WHERE FECHA_LLEGADA >= @FechaInicio
-      AND FECHA_SALIDA <= @FechaFin
-      AND ID_ESTADO = 1;
-
-    RETURN;
+  INSERT INTO @Reservas
+  SELECT ID_RESERVA, NOMBRE_APELLIDO, FECHA_LLEGADA, FECHA_SALIDA
+  FROM RESERVAS
+  WHERE FECHA_LLEGADA >= @FechaInicio
+    AND FECHA_SALIDA <= @FechaFin
+    AND ID_ESTADO = 1;
+  RETURN;
 END;
 ```
 
@@ -199,7 +183,7 @@ Las funciones de sistema son funciones predefinidas que permiten acceder a infor
 
 - SYSDATETIME(): Devuelve la fecha y hora actual con más precisión.
 
-## VENTAJAS DEL USO DE FUNCIONES ALMACENADAS
+## **Ventajas del uso de funciones almacenadas**
 
 - Reutilización de Código: Las funciones encapsulan lógica que se puede reutilizar en múltiples consultas, permitiendo su invocación en diferentes partes de la aplicación y en expresiones SQL.
 
@@ -213,10 +197,10 @@ Las funciones de sistema son funciones predefinidas que permiten acceder a infor
 
 - Mantenimiento Simplificado: Actualizar la lógica de negocio solo requiere modificar la función en un solo lugar, lo que mejora la consistencia y simplifica el mantenimiento en el código de la aplicación.
 
-## Tareas
+## **Tareas**
 
 > Ver el script para entender más [script.sql](script.sql)
 
-## CONCLUSION
+## **Conclución**
 
 Una función puede ser llamada en un SELECT, WHERE, o cualquier otra parte de una consulta, lo que facilita la manipulación de datos de manera dinámica. Mientras que en un procedimineto almacenado se utilizan para ejecutar operaciones como inserciones, actualizaciones, eliminaciones, o cualquier acción que implique cambios en los datos o en su estructura.
