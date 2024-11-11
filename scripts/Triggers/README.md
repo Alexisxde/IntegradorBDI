@@ -22,7 +22,7 @@ La instrucción **CREATE TRIGGER** permite crear un nuevo trigger que se activa 
 
 ```SQL
 CREATE TRIGGER nombre_trigger
-ON nombre_tabla AFTER (INSERT o UPDATE o DELETE) AS
+ON nombre_tabla (AFTER o INSTEAD OF) (INSERT o UPDATE o DELETE) AS
 BEGIN
   -- SQL
 END;
