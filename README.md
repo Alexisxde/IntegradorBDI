@@ -98,11 +98,29 @@ En la elaboración de nuestro caso de estudio, utilizamos las siguientes herrami
 
 Acceso al documento [PDF](docs/diccionario_datos.pdf) del diccionario de datos.
 
-<!-- ### Desarrollo TEMA 1 "----"
+### Manejo de permisos a nivel de usuarios de base de datos
 
-Fusce auctor finibus lectus, in aliquam orci fermentum id. Fusce sagittis lacus ante, et sodales eros porta interdum. Donec sed lacus et eros condimentum posuere.
+En este tema, exploraremos cómo definir, asignar y gestionar permisos de usuarios, desde los permisos básicos de lectura y escritura hasta configuraciones más avanzadas como la administración de roles e inicios de sesión. 
 
-> Acceder a la siguiente carpeta para la descripción completa del tema [tema_1](script/tema01_nombre_tema) -->
+> Acceder a la siguiente carpeta para la descripción completa del tema [Manejo de permisos a nivel de usuarios de base de datos](https://github.com/Alexisxde/IntegradorBDI/tree/main/scripts/Manejo%20de%20permisos%20a%20nivel%20de%20usuarios%20de%20base%20de%20datos).
+
+### Optimización de consultas a través de índices
+
+En este tema, aprenderás cómo los índices pueden acelerar las búsquedas, reducir el tiempo de respuesta en operaciones de lectura y mejorar el rendimiento general del sistema. Exploraremos los diferentes tipos de índices, cómo y cuándo aplicarlos, y una comparación real de qué tan eficientes son.
+
+> Acceder a la siguiente carpeta para la descripción completa del tema [Optimización de consultas a través de índices](https://github.com/Alexisxde/IntegradorBDI/tree/main/scripts/Optimizaci%C3%B3n%20de%20consultas%20a%20trav%C3%A9s%20de%20%C3%ADndices)
+
+### Procedimientos y funciones almacenadas
+
+En este tema, descubrirás cómo los procedimientos almacenados pueden automatizar tareas repetitivas, gestionar transacciones y mejorar el control de los datos, mientras que las funciones almacenadas facilitan cálculos y transformaciones en tiempo real.
+
+> Acceder a la siguiente carpeta para la descripción completa del tema [Procedimientos y funciones almacenadas](https://github.com/Alexisxde/IntegradorBDI/tree/main/scripts/Procedimientos%20y%20funciones%20almacenadas)
+
+### Triggers
+
+En este tema, exploraremos cómo los triggers pueden ayudarte a automatizar auditorías, mantener reglas de negocio y reaccionar a cambios en tiempo real.
+
+> Acceder a la siguiente carpeta para la descripción completa del tema [Triggers](https://github.com/Alexisxde/IntegradorBDI/tree/main/scripts/Triggers)
 
 ## CAPÍTULO V: CONCLUSIONES
 
