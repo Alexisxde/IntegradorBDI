@@ -68,6 +68,10 @@ GRANT SELECT ON dbo.CARGOS TO SUPERVISORES;
 ALTER ROLE SUPERVISORES ADD MEMBER SUPERVISOR_FACUNDO;
 ```
 
+## Tareas
+
+> Ver el script para entender más [script.sql](script.sql)
+
 ## **Conclusión**
 
 El manejo de permisos a nivel de usuarios en bases de datos es un componente crítico para garantizar la seguridad y control sobre la información. SQL Server proporciona un sistema robusto que permite tanto la autenticación (a través de inicios de sesión y usuarios) como la autorización (mediante permisos y roles) para gestionar el acceso a los datos.
@@ -75,4 +79,3 @@ El manejo de permisos a nivel de usuarios en bases de datos es un componente cr�
 El uso de roles y permisos bien estructurados no solo asegura que cada usuario tenga acceso únicamente a la información que necesita, sino que también facilita la administración de grandes sistemas con múltiples usuarios y bases de datos.
 
 En este caso de estudio, pudimos descubrir que un buen manejo de los permisos a nivel de usuarios es esencial para proteger los datos y optimizar la gestión de los recursos dentro de cualquier base de datos en SQL Server.
-
