@@ -80,9 +80,6 @@ ORDER BY FECHA_NACIMIENTO DESC
 ALTER TABLE HUESPEDES
 DROP CONSTRAINT PK_DNI_HUESPED
 
-ALTER TABLE HUESPEDES
-ADD CONSTRAINT PK_DNI_HUESPED PRIMARY KEY (DNI)
-
 
 /****************************Realiza una consulta que filtre por un rango de fechas****************************/
 
@@ -176,6 +173,69 @@ SET STATISTICS IO OFF;
 --BORRAR INDICE
 DROP INDEX idx_fecha_nacimiento_dato ON HUESPEDES;
 
+--COLOCAMOS LA CLAVE PRIMARIA PARA DEJAR COMO AL PRINCIPIO LA TABLA.
+ALTER TABLE HUESPEDES
+ADD CONSTRAINT PK_DNI_HUESPED PRIMARY KEY (DNI)
+
+                        /******************ANALISIS DE RESULTADOS**************/
+
+-- --- Resultados de la consulta sin índice ---
+| Métrica                       | Valor   |
+|-------------------------------|---------|
+| **Tiempo total de ejecución** | 4733 ms |
+| **Tiempo de CPU**             | 640 ms  |
+| **Lecturas lógicas**          | 4646    |
+| **Lecturas físicas**          | 0       |
+
+-- --- Resultados de la consulta con índice agrupado ---
+| Métrica                       | Valor   |
+|-------------------------------|---------|
+| **Tiempo total de ejecución** | 4406 ms |
+| **Tiempo de CPU**             | 219 ms  |
+| **Lecturas lógicas**          | 4660    |
+| **Lecturas físicas**          | 0       |
+
+
+-- --- Resultados de la consulta con índice no agrupado ---
+| Métrica                       | Valor   |
+|-------------------------------|---------|
+| **Tiempo total de ejecución** | 4735 ms |
+| **Tiempo de CPU**             | 547 ms  |
+| **Lecturas lógicas**          | 4646    |
+| **Lecturas físicas**          | 0       |
+
+-- Análisis de Resultados
+
+-- Consulta sin Índice:
+
+-- Tiempo total de ejecución: 4733 ms
+-- Tiempo de CPU: 640 ms
+-- Lecturas lógicas: 4646
+-- Lecturas físicas: 0
+-- Esta consulta tiene un rendimiento moderado en términos de tiempo de ejecución y un tiempo de CPU relativamente alto.
+-- La ausencia de índices significa que el motor de la base de datos tuvo que realizar un escaneo completo de la tabla para 
+-- obtener los resultados.
+
+-- Consulta con Índice Agrupado:
+
+-- Tiempo total de ejecución: 4406 ms
+-- Tiempo de CPU: 219 ms
+-- Lecturas lógicas: 4660
+-- Lecturas físicas: 0
+-- Aquí, aunque el tiempo total de ejecución es ligeramente mejor que sin índice (4406 ms frente a 4733 ms), lo más notable 
+-- es la reducción significativa en el tiempo de CPU (219 ms frente a 640 ms). Esto indica que el índice agrupado ha permitido 
+-- al motor de la base de datos ejecutar la consulta de manera más eficiente, utilizando el índice para evitar cálculos 
+-- innecesarios.
+
+-- Consulta con Índice No Agrupado:
+
+-- Tiempo total de ejecución: 4735 ms
+-- Tiempo de CPU: 547 ms
+-- Lecturas lógicas: 4646
+-- Lecturas físicas: 0
+-- Esta consulta tiene un rendimiento similar al de la consulta sin índice, tanto en tiempo de ejecución como en lecturas
+-- lógicas. Aunque el índice no agrupado fue creado para incluir columnas adicionales,no ofreció una mejora significativa 
+-- en el rendimiento para esta consulta en particular.
 
 
 

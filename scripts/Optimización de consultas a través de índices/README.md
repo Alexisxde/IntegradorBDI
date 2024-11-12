@@ -48,6 +48,39 @@ INCLUDE (NOMBRE_APELLIDO);
 DROP INDEX idx_fecha_nacimiento_dato ON HUESPEDES;
 ```
 
+### Plan de ejecución del motor de base de datos STATICS TIME, STATICS TIME Y SHOWPLAN.
+
+La sentencia SET STATISTICS TIME ON; en SQL Server permite ver los tiempos de ejecución de las consultas, tanto el tiempo de CPU como el tiempo total requerido para completar la consulta. Cuando está activada, cada vez que se ejecuta una consulta, SQL Server muestra:
+Tiempo de CPU usado por la consulta.
+Tiempo total de ejecución, que incluye tiempo de espera y procesamiento en el servidor.
+
+```SQL
+SET STATISTICS TIME ON;
+SELECT * FROM [NombreTabla] WHERE [Condiciones];--consulta
+SET STATISTICS OFF;-- Deshabilitar el plan de ejecución
+```
+
+Tiempo de CPU usado por la consulta.
+Tiempo total de ejecución, que incluye tiempo de espera y procesamiento en el servidor.
+
+SHOWPLAN_ALL – no ejecuta la consulta, muestra el texto del plan de consultas estimado junto con el costo de la estimación.
+
+```SQL
+SET SHOWPLAN_ALL ON;-- Habilitar el plan de ejecución para la consulta sin índice
+SELECT * FROM [NombreTabla] WHERE [Condiciones];--consulta
+SET SHOWPLAN_ALL OFF;-- Deshabilitar el plan de ejecución
+
+```
+
+STATISTICS PROFILE – ejecuta la consulta, muestra los resultados y texto del plan de consultas real.
+
+```SQL
+SET STATISTICS PROFILE ON;
+SELECT * FROM [NombreTabla] WHERE [Condiciones];--consulta
+SET STATISTICS PROFILE OFF;
+```
+
+
 ## **Tareas**
 
 > Ver el script para entender más [script.sql](script.sql)
@@ -70,106 +103,6 @@ Uso de Espacio:
 Índice Agrupado: Al estar directamente ligado a las filas de datos, el índice agrupado no requiere espacio adicional más allá de los datos en sí.
 Índice No Agrupado: Requiere espacio adicional en disco, ya que los datos del índice y los datos de la tabla están separados.
 
-## Tareas:
 
-- Realizar una carga masiva de por lo menos un millón de registro sobre alguna tabla que contenga un campo fecha (sin índice). Hacerlo con un script para poder automatizarlo.
 
-Se han insertado 1 millon de registros en la tabla HUESPEDES en el script de Optimizacion_indices.sql
 
-El bucle WHILE se ejecuta hasta que @Counter sea mayor que la diferencia entre @MaxRecords y el número actual de registros en @Datos.
-
-Se selecciona un registro aleatorio de @Datos usando ORDER BY NEWID(). Luego, se asignan a las variables @BaseDNI, @BaseNombre y @BaseFecha los valores de DNI, nombre y fecha de nacimiento del registro seleccionado.
-
-Para asegurar que cada registro tenga un DNI único, se incrementa @BaseDNI sumándole el valor de @Counter.
-
-Se inserta un nuevo registro en HUESPEDES, copiando @BaseNombre, el DNI modificado (@BaseDNI), y una fecha de nacimiento variada. La fecha es alterada aleatoriamente dentro de un rango de 365 días usando DATEADD y RAND().
-
-Actualización del Contador: Finalmente, @Counter aumenta en 1, acercando el ciclo a su límite.
-
-- Realizar una búsqueda por periodo y registrar el plan de ejecución utilizado por el motor y los tiempos de respuesta.
-
-```plan de ejecucion del motor en un intervalo de fecha
-SET SHOWPLAN_ALL ON;-- Habilitar el plan de ejecución para la consulta sin índice
-go
-SELECT *
-FROM HUESPEDES
-WHERE FECHA_NACIMIENTO BETWEEN '1978-11-05' AND '2011-11-20';
-go
-SET SHOWPLAN_ALL OFF;-- Deshabilitar el plan de ejecución
-go
-```
-
-```tiempos de ejecucion en un intervalo de fecha
-SET STATISTICS TIME ON;
-SET STATISTICS IO ON;
-
-SELECT *
-FROM HUESPEDES
-WHERE FECHA_NACIMIENTO BETWEEN '1978-11-05' AND '2011-11-20';
-ORDER BY FECHA_NACIMIENTO
-
-SET STATISTICS TIME OFF;
-SET STATISTICS IO OFF;
-```
-
-- Definir un índice agrupado sobre la columna fecha y repetir la consulta anterior. Registrar el plan de ejecución utilizado por el motor y los tiempos de respuesta.
-
-CREATE CLUSTERED INDEX idx_fecha_nacimiento ON HUESPEDES(FECHA_NACIMIENTO);
-
-- Borrar el índice creado.
-
-```
-DROP INDEX idx_fecha_nacimiento ON HUESPEDES;
-```
-
-- Definir otro índice agrupado sobre la columna fecha pero que además incluya las columnas seleccionadas y repetir la consulta anterior. Registrar el plan de ejecución utilizado por el motor y los tiempos de respuesta.
-
-```
-CREATE NONCLUSTERED INDEX idx_fecha_nacimiento_dato ON HUESPEDES(FECHA_NACIMIENTO)
-```
-
-- Expresar las conclusiones en base a las pruebas realizadas.
-
---- Resultados de la consulta sin índice ---
-Tiempo total de ejecución: [4733 ms]
-Tiempo de CPU: [640 ms]
-Lecturas lógicas: [4646]
-Lecturas físicas: [0]
-
---- Resultados de la consulta con índice agrupado ---
-Tiempo total de ejecución: [4406 ms]
-Tiempo de CPU: [219 ms]
-Lecturas lógicas: [4660]
-Lecturas físicas: [0]
-
---- Resultados de la consulta con índice no agrupado ---
-Tiempo total de ejecución: [4735 ms]
-Tiempo de CPU: [547 ms]
-Lecturas lógicas: [4646]
-Lecturas físicas: [0]
-
-## Análisis de Resultados
-
-## Consulta sin Índice:
-
-Tiempo total de ejecución: 4733 ms
-Tiempo de CPU: 640 ms
-Lecturas lógicas: 4646
-Lecturas físicas: 0
-Esta consulta tiene un rendimiento moderado en términos de tiempo de ejecución y un tiempo de CPU relativamente alto. La ausencia de índices significa que el motor de la base de datos tuvo que realizar un escaneo completo de la tabla para obtener los resultados.
-
-## Consulta con Índice Agrupado:
-
-Tiempo total de ejecución: 4406 ms
-Tiempo de CPU: 219 ms
-Lecturas lógicas: 4660
-Lecturas físicas: 0
-Aquí, aunque el tiempo total de ejecución es ligeramente mejor que sin índice (4406 ms frente a 4733 ms), lo más notable es la reducción significativa en el tiempo de CPU (219 ms frente a 640 ms). Esto indica que el índice agrupado ha permitido al motor de la base de datos ejecutar la consulta de manera más eficiente, utilizando el índice para evitar cálculos innecesarios.
-
-## Consulta con Índice No Agrupado:
-
-Tiempo total de ejecución: 4735 ms
-Tiempo de CPU: 547 ms
-Lecturas lógicas: 4646
-Lecturas físicas: 0
-Esta consulta tiene un rendimiento similar al de la consulta sin índice, tanto en tiempo de ejecución como en lecturas lógicas. Aunque el índice no agrupado fue creado para incluir columnas adicionales,no ofreció una mejora significativa en el rendimiento para esta consulta en particular.
