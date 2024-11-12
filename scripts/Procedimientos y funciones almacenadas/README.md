@@ -6,7 +6,7 @@ En SQL Server, los procedimientos almacenados y las funciones son herramientas c
 
 Los procedimientos almacenados se utilizan principalmente para ejecutar tareas específicas, como operaciones de inserción, actualización, eliminación o cualquier acción que implique cambios en los datos o en su estructura. Sirven para encapsular múltiples pasos en un solo bloque de código que puede llamarse luego. Los procedimientos almacenados pueden incluir parámetros de entrada y salida, lo que permite manejar datos complejos y devolver resultados variables.
 
-Las funciones están diseñadas para realizar cálculos o transformaciones que se pueden aplicar directamente en consultas SQL. Esto significa que una función puede ser llamada en un SELECT, WHERE o cualquier otra parte de una consulta, facilitando la manipulación de datos de manera dinámica. Sin embargo, a diferencia de los procedimientos restricciones: no pueden modificar datos en la base de datos y están limitadas a solo leer datos. Este diseño asegura que sean seguras de utilizar en consultas sin causar efectos secundarios no deseados en la base de datos.
+Las funciones están diseñadas para realizar cálculos o transformaciones que se pueden aplicar directamente en consultas SQL. Esto significa que una función puede ser llamada en un SELECT, WHERE o cualquier otra parte de una consulta, facilitando la manipulación de datos de manera dinámica. Sin embargo, a diferencia de los procedimientos, tienen restricciones: no pueden modificar datos en la base de datos y están limitadas a solo leer datos. Este diseño asegura que sean seguras de utilizar en consultas sin causar efectos secundarios no deseados en la base de datos.
 
 ## **¿Qué es un procedimiento almacenado?**
 
@@ -129,7 +129,7 @@ END;
 
 ### `2. Funciones con Valores de Tabla en Línea`
 
-Las funciones en línea que devuelven valores de tabla son funciones que devuelven una tabla (set de resultados) en función de una sola instrucción de consulta. Estas funciones son similares a las vistas pero ofrecen la ventaja de aceptar parámetros, lo que permite un mayor control sobre los datos devueltos.
+Las funciones en línea devuelven una tabla (set de resultados) en función de una sola instrucción de consulta. Estas funciones son similares a las vistas pero ofrecen la ventaja de aceptar parámetros, lo que permite un mayor control sobre los datos devueltos.
 
 ```SQL
 CREATE FUNCTION dbo.ObtenerReservasCliente(@NombreCliente VARCHAR(50))
@@ -203,4 +203,4 @@ Las funciones de sistema son funciones predefinidas que permiten acceder a infor
 
 ## **Conclución**
 
-Una función puede ser llamada en un SELECT, WHERE, o cualquier otra parte de una consulta, lo que facilita la manipulación de datos de manera dinámica. Mientras que en un procedimineto almacenado se utilizan para ejecutar operaciones como inserciones, actualizaciones, eliminaciones, o cualquier acción que implique cambios en los datos o en su estructura.
+Una función puede ser llamada en un SELECT, WHERE, o cualquier otra parte de una consulta, lo que facilita la manipulación de datos de manera dinámica. Mientras que un procedimiento almacenado se utiliza para ejecutar operaciones como inserciones, actualizaciones, eliminaciones, o cualquier acción que implique cambios en los datos o en su estructura.
