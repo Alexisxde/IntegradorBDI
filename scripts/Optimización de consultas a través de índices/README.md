@@ -32,11 +32,11 @@ El puntero de una fila de índice en un índice no agrupado a una fila de datos 
 Para un montón, un localizador de filas es un puntero a la fila. 
 Para una tabla agrupada, el localizador de filas es la clave de índice agrupada.
 
-- **Ventajas:**
+**Ventajas:**
 - Flexibilidad: Permite crear múltiples índices no agrupados sobre una tabla, lo que puede acelerar consultas que no se benefician del índice agrupado.
 - Mejora en Consultas: Es útil para acelerar consultas que filtran o buscan en columnas que no son la clave primaria.
   
-- **Desventajas:**
+**Desventajas:**
 - Rendimiento en Escrituras: Cada vez que se inserta, actualiza o elimina una fila, los índices no agrupados también deben actualizarse, lo que puede afectar el rendimiento de las operaciones de escritura.
 - Espacio: Requieren espacio adicional en disco debido a su estructura separada.
 
@@ -64,9 +64,8 @@ SET STATISTICS TIME ON;
 SELECT * FROM [NombreTabla] WHERE [Condiciones];--consulta
 SET STATISTICS OFF;-- Deshabilitar el plan de ejecución
 ```
-
-Tiempo de CPU usado por la consulta.
-Tiempo total de ejecución, que incluye tiempo de espera y procesamiento en el servidor.
+- Tiempo de CPU usado por la consulta.
+- Tiempo total de ejecución, que incluye tiempo de espera y procesamiento en el servidor.
 
 SHOWPLAN_ALL – no ejecuta la consulta, muestra el texto del plan de consultas estimado junto con el costo de la estimación.
 
