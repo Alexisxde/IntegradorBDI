@@ -26,7 +26,7 @@ Si queremos crear un usuario sin ningún inicio de sesión asociado, se utilizan
 ```SQL
 CREATE USER NombreUsuario WITHOUT LOGIN;
 ```
-> [!CAUTION]
+> [!IMPORTANT]
 > Los usuarios sin login solo existen dentro de la base de datos, están restringidos a la base de datos donde se crean y no tienen acceso a otras bases de datos ni a la instancia de SQL Server.
 
 ## **¿Qué es una base de datos contenida?**
@@ -63,7 +63,7 @@ SQL Server brinda de forma predeterminada una amplia lista de roles a nivel de b
 - db_datawriter: Puede escribir datos en todas las tablas de la base de datos.
 - db_ddladmin: Puede ejecutar comandos DDL (crear, modificar tablas,procedimientos, etc.).
   
-> [!TIP]  
+> [!NOTE]  
 > Si desea conocer la lista completa de roles con información más detallada, puede consultar en la [documentación oficial de Microsoft](https://learn.microsoft.com/es-es/sql/relational-databases/security/authentication-access/database-level-roles?view=sql-server-ver16)
 
 Para crear un rol, usamos las siguientes clausulas:
@@ -74,7 +74,7 @@ CREATE ROLE SUPERVISORES; -- Creamos el rol.
 GRANT SELECT ON dbo.CARGOS TO SUPERVISORES; -- Le asignamos los permisos de lectura en la tabla CARGOS.
 ```
 > [!IMPORTANT]  
-> `Luego de crear el rol, debemos agregar el usuario a dicho rol, no se agrega automaticamente`.
+> Luego de crear el rol, debemos agregar el usuario a dicho rol, no se agrega automaticamente.
 
 ```SQL
 ALTER ROLE SUPERVISORES ADD MEMBER SUPERVISOR_FACUNDO; -- Agregamos un usuario al rol creado.
