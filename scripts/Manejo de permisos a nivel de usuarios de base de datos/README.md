@@ -49,10 +49,8 @@ Para otorgar algún permiso usando T-SQL, se usan las siguientes clausulas:
 -- Asignamos el permiso de insertar al usuario Gerente_Carlos.
 GRANT INSERT -- Se puede otorgar más de un permiso, separandolos con coma.
 ON dbo.CARGOS -- Se selecciona la tabla especifica.
-TO GERENTE_CARLOS; -- Se escribe el usuario al que queremos asignar el permiso
+TO GERENTE_CARLOS; -- Se escribe el usuario al que queremos asignar el permiso, sin comillas simples
 ```
-> [!IMPORTANT]  
-> El usuario debe ser escrito sin comillas simples.
 
 ## **¿Qué son y cómo se otorgan los roles?**
 
