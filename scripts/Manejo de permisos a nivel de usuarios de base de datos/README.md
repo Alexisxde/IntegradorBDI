@@ -15,9 +15,19 @@ El inicio de sesión permite acceder al servidor SQL, mientras que el usuario de
 Se puede usar la interfaz que brinda SQL Server o usando Transact SQL (T-SQL), el cual es una variante del SQL estandar, diseñada especificamente para SQL Server. Nosotros utilizamos lenguaje T-SQL. Se utilizan las siguientes clausulas:
 
 ```SQL
-CREATE LOGIN NombreUsuario WITH PASSWORD = 'Contraseña'; -- Creamos un inicio de sesión.
-CREATE USER NombreUsuario FOR LOGIN NombreUsuario; -- Creamos un usuario y lo vinculamos con el inicio de sesión creado.
+-- Creamos un inicio de sesión.
+CREATE LOGIN NombreUsuario WITH PASSWORD = 'Contraseña';
+
+-- Creamos un usuario y lo vinculamos con el inicio de sesión creado.
+CREATE USER NombreUsuario FOR LOGIN NombreUsuario; 
 ```
+Si queremos crear un usuario sin ningún inicio de sesión asociado, se utilizan las siguientes clausulas:
+
+```SQL
+CREATE USER NombreUsuario WITHOUT LOGIN;
+```
+> [!CAUTION]
+> Los usuarios sin login solo existen dentro de la base de datos, están restringidos a la base de datos donde se crean y no tienen acceso a otras bases de datos ni a la instancia de SQL Server.
 
 ## **¿Qué es una base de datos contenida?**
 
@@ -39,26 +49,36 @@ Para otorgar algún permiso usando T-SQL, se usan las siguientes clausulas:
 -- Asignamos el permiso de insertar al usuario Gerente_Carlos.
 GRANT INSERT -- Se puede otorgar más de un permiso, separandolos con coma.
 ON dbo.CARGOS -- Se selecciona la tabla especifica.
-TO GERENTE_CARLOS; -- Se escribe el usuario al que se le asigna el permiso, sin comillas simples.
+TO GERENTE_CARLOS; -- Se escribe el usuario al que queremos asignar el permiso
 ```
+> [!IMPORTANT]  
+> El usuario debe ser escrito sin comillas simples.
 
 ## **¿Qué son y cómo se otorgan los roles?**
 
 Los roles en SQL Server son conjuntos de permisos predefinidos que facilitan la administración. Los roles pueden aplicarse a nivel de base de datos o servidor. Esto permite una gestión más sencilla al asignar permisos a grupos de usuarios.
 
-SQL Server brinda de forma predeterminada una amplia lista de roles, entre los más comunes encontramos los siguientes:
+SQL Server brinda de forma predeterminada una amplia lista de roles a nivel de base de datos, entre los más comunes encontramos los siguientes:
 
 - db_owner: Tiene todos los permisos sobre la base de datos.
 - db_securityadmin: Gestiona roles y permisos dentro de la base de datos.
 - db_datawriter: Puede escribir datos en todas las tablas de la base de datos.
 - db_ddladmin: Puede ejecutar comandos DDL (crear, modificar tablas,procedimientos, etc.).
+  
+> [!TIP]  
+> Si desea conocer la lista completa de roles con información más detallada, puede consultar en la [documentación oficial de Microsoft](https://learn.microsoft.com/es-es/sql/relational-databases/security/authentication-access/database-level-roles?view=sql-server-ver16)
 
-Para otorgar estos permisos usamos las siguientes clausulas:
+Para crear un rol, usamos las siguientes clausulas:
 
 ```SQL
 USE ADMINISTRACION_HOTEL; -- Seleccionamos la base de datos donde queremos que se cree el rol.
 CREATE ROLE SUPERVISORES; -- Creamos el rol.
 GRANT SELECT ON dbo.CARGOS TO SUPERVISORES; -- Le asignamos los permisos de lectura en la tabla CARGOS.
+```
+> [!IMPORTANT]  
+> `Luego de crear el rol, debemos agregar el usuario a dicho rol, no se agrega automaticamente`.
+
+```SQL
 ALTER ROLE SUPERVISORES ADD MEMBER SUPERVISOR_FACUNDO; -- Agregamos un usuario al rol creado.
 ```
 
