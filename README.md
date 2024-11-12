@@ -76,8 +76,6 @@ Nuestro caso de estudio se dividió en 7 fases, las cuales se detallan a continu
 
 ### Herramientas (Instrumentos y procedimientos)
 
-Nuestra principal fuente de información fue internet, para la obtención de información sobre el motor SQL Server, utilizamos la [documentación oficial](https://learn.microsoft.com/es-mx/sql/sql-server/?view=sql-server-ver16) de Microsoft, para investigar más sobre T-SQL.
-
 En la elaboración de nuestro caso de estudio, utilizamos las siguientes herramientas:
 - *[ERD Plus](https://erdplus.com/):* Una sencilla pero potente herramienta para modelado de bases de datos, teniendo herramientas para crear diagramas relacionales,conceptuales, y          código SQL. ERD Plus nos permitió modelar el esquema conceptual.
 - *[ChartDB](https://chartdb.io/):* Una herramienta gratis y de código abierto para diseñar bases de datos,entre sus caracteristicas está importar,expotar,editar y crear diagramas relacionales. ChartDB nos permitió modelar el esquema relacional de nuestra base de datos y exportar el modelo a SQL.
@@ -124,17 +122,19 @@ En este tema, exploraremos cómo los triggers pueden ayudarte a automatizar audi
 
 ## CAPÍTULO V: CONCLUSIONES
 
-Este capítulo permite al alumno presentar su interpretación y explicar el sentido de los
-resultados encontrados en el capítulo anterior. El alumno debe examinar los hallazgos y expresar
-su propia opinión respecto a los mismos y determinar si los objetivos del Trabajo Práctico fueron
-alcanzados.
+El desarrollo de este trabajo práctico ha permitido demostrar la importancia y el impacto de una buena estructura y diseño de bases de datos en la gestión de información crítica en un caso de estudio real. A lo largo de las diferentes fases del proyecto, se lograron cumplir los objetivos planteados, destacando la eficiencia en la administración de datos clave como la gestión de usuarios, optimización de consultas, automatización de procesos y ejecución de reglas de negocio a través de triggers.
 
-La conclusión no es algo arbitrario, es algo basado en la información recogida durante la
-realización del Trabajo Práctico.
+El manejo de permisos a nivel de usuarios fue una pieza fundamental para garantizar la seguridad de la información, permitiendo un control personalizado sobre qué acciones pueden realizar los usuarios en la base de datos.
+
+En cuanto a la optimización de consultas mediante índices, se logró mejorar el rendimiento de las operaciones de búsqueda y acceso a los datos, demostrando que los índices bien implementados no solo reducen el tiempo de respuesta, sino que también optimizan el uso de los recursos del sistema.
+
+Por otro lado, los procedimientos y funciones almacenadas permitieron una mayor modularidad y eficiencia en la ejecución de tareas repetitivas y complejas, lo que se tradujo en un sistema más robusto y fácil de mantener. Los triggers, por su parte, jugaron un papel esencial en la automatización de procesos, ayudando a mantener la integridad de los datos y aplicar reglas de negocio sin intervención manual, evitando posibles errores humanos.
+
+La correcta implementación de estos conceptos permitió alcanzar una solución eficiente y segura, alineada con los objetivos propuestos. Este proyecto no solo nos ayudó a entender los conocimientos adquiridos y a tener nuevos conocimientos, sino que también nos mostró la relevancia de una administración cuidadosa y planificada de las bases de datos en entornos reales.
 
 ## BIBLIOGRAFÍA DE CONSULTA
 
-Bibliografía mencionada: Se deben citar de manera normalizada todos los documentos
-consultados y efectivamente utilizados para la realización del trabajo. La forma correcta de
-realizar las citas es incluyendo: autor (es), fecha de publicación, título, información acerca de la
-publicación.
+1. [Documentación oficial de SQL Server de Microsoft](https://learn.microsoft.com/es-mx/sql/sql-server/?view=sql-server-ver16)
+2. [¿Qué son y cómo funcionan los triggers? de CódigoFacilito](https://youtu.be/-fukpY1OTNw?si=TAIrty03_rn5pUpI)
+3. [¿Procedimientos Almacenados: ¿Qué son? ¿Para qué sirven? ¿Cómo se usan? de The Coder Cave esp](https://youtu.be/XQUPbNFLJn4?si=h7heR32004x5Lr04)
+4. [Como usar Index en la Base de Datos SQL Server con Management Studio de Aguilar Systems MX](https://youtu.be/jnox-qm4F5Y?si=Glf2MocKcJAwTf1X)
