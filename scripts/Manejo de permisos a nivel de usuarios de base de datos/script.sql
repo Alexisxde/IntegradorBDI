@@ -50,6 +50,8 @@ EXEC dbo.agregarCargo @IdCargo = N'15', @NombreCargo = N'Chef';
 GO
 REVERT;
 --Ningún error
+--Esto ocurre por que el usuario SI tiene permiso para ejecutar el procedimiento agregarCargo (Se le concedió permiso en la linea 26).
+--Dicho de otra forma, puede utilizar el procedimiento para insertar en la tabla, pero NO puede insertarlo directamente.
 
 /*--------------------------------------------------------------------------------------*/
 /*----------------------Permisos a nivel de roles del DBMS------------------------------*/
