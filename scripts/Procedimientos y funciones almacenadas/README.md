@@ -34,7 +34,7 @@ END;
 ```
 
 > [!NOTE]  
-> Por defecto, los procedimientos almacenados de usuario son *permanentes locales*, es decir, están disponibles solo en la base de datos actual y se almacenan en la base de datos local.
+> Por defecto, los procedimientos almacenados de definidos por el usuario son *permanentes locales*, es decir, están disponibles solo en la base de datos actual y se almacenan en la base de datos local.
 
 ### `2. Temporales`
 
