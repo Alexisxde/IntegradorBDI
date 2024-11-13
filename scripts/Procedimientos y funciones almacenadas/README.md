@@ -33,6 +33,9 @@ BEGIN
 END;
 ```
 
+> [!NOTE]  
+> Por defecto, los procedimientos almacenados de usuario son *permanentes locales*, es decir, están disponibles solo en la base de datos actual y se almacenan en la base de datos local.
+
 ### `2. Temporales`
 
 Los procedimientos temporales son una variante de los procedimientos definidos por el usuario, pero están diseñados para usarse de forma temporal y se almacenan en tempdb. Existen procedimientos temporales locales, que son accesibles solo en la sesión actual, y procedimientos globales, visibles para cualquier usuario tras su creación. Son útiles para operaciones temporales o específicas de una sesión, sin necesidad de persistir en la base de datos.
