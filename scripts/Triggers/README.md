@@ -29,7 +29,7 @@ END;
 ```
 
 > [!IMPORTANT]  
-> Un `TRIGGER` no puede existir sin una tabla asociada.
+> Un `TRIGGER` no puede existir sin una tabla o vista asociada.
 
 ## **Tipos de `TRIGGER` en SQL Server**
 
