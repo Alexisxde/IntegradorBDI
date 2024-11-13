@@ -8,27 +8,27 @@
 /*
  * Crear la tabla de auditoría
  *
- * Esta tabla almacenará los valores antiguos antes
+ * Esta tabla almacenará los valores antiguos después
  * de una actualización o eliminación. Además, se registrará
  * la fecha, hora y el usuario de la base de datos. 
 */
 CREATE TABLE AUDITORIA_EMPLEADOS (
   ID_AUDITORIA_EMPLEADO INT IDENTITY(1, 1),
   ID_EMPLEADO INT NOT NULL, 
-	NOMBRE_APELLIDO VARCHAR(50) NOT NULL,
+  NOMBRE_APELLIDO VARCHAR(50) NOT NULL,
   HORARIO VARCHAR(50) NOT NULL,
   ID_CARGO INT NOT NULL,
   FECHA DATETIME,
   USUARIOBD VARCHAR(128),
   OPERACION VARCHAR(10),
-	CONSTRAINT PK_AUDITORIA_EMPLEADOS PRIMARY KEY(ID_AUDITORIA_EMPLEADO),
-	CONSTRAINT FK_ID_CARGO_AUDITORIA_EMPLEADO FOREIGN KEY (ID_CARGO) REFERENCES CARGOS(ID_CARGO)
+  CONSTRAINT PK_AUDITORIA_EMPLEADOS PRIMARY KEY(ID_AUDITORIA_EMPLEADO),
+  CONSTRAINT FK_ID_CARGO_AUDITORIA_EMPLEADO FOREIGN KEY (ID_CARGO) REFERENCES CARGOS(ID_CARGO)
 );
 
 /*
  * Crear el `TRIGGER` para `UPDATE`
  * 
- * Este trigger registrará los valores antes de una actualización:
+ * Este trigger registrará los valores después de una actualización:
 */
 CREATE TRIGGER TRG_AUDITORIA_UPDATE_EMPLEADOS
 ON EMPLEADOS AFTER UPDATE AS SET NOCOUNT ON
@@ -48,7 +48,7 @@ END;
 /* 
  * Crear el `TRIGGER` para `DELETE`
  *
- * Este trigger registrará los valores antes de una eliminación:
+ * Este trigger registrará los valores después de una eliminación:
 */
 CREATE TRIGGER TRG_AUDITORIA_DELETE_EMPLEADOS
 ON EMPLEADOS AFTER DELETE AS SET NOCOUNT ON
